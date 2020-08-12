@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin cá nhân</title>
+    <head th:replace="Home/head :: head">
+    </head>
+<body>
+<div th:replace="Home/header :: header"></div>
+
+<div class="row">
+    <div class="col-3 div-about-me meme">
+        <ul class="nav flex-column ul-about-me">
+            <!--            <li class="nav-item  li-about-me">-->
+            <!--                <a class="nav-link text-dark" th:href="@{/chiTietGioHang}">Kiểm tra đơn hàng</a>-->
+            </li>
+
+        </ul>
+    </div>
+    <div class="col-9 meme">
+        <div class="row">
+            <div class="col-5"><h5 style="padding: 30px">Sửa thông tin cá nhân</h5></div>
+            <div class="col-5"><h5 style="padding: 30px">Đổi mật khẩu</h5></div>
+        </div>
+        <div class="row">
+            <div class="col-5 about-me">
+                <form id="form_save" th:action="@{/saveChange}">
+                    <div class="form-group">
+                        <input name="username" th:disabled="true" th:value="${userAbout.getUsername()}" type="email"
+                               class="form-control" id="email" placeholder="Nhập email mới"/>
+                        <small id="email_" style="display: none" class="form-text text-muted">thong bao loi o day
+                        </small>
+                    </div>
+                    <div class="form-group">
+
+                        <input name="diachi" th:value="${userAbout.getDiachi()}" type="text" class="form-control"
+                               id="address" placeholder="Địa chỉ"/>
+                        <small id="address_" style="display: none;color: red" class="form-text">thong bao loi o
+                            day
+                        </small>
+                    </div>
+                    <div class="form-group">
+
+                        <input name="ten" th:value="${userAbout.getTen()}" type="text" class="form-control"
+                               id="name" placeholder="Tên"/>
+                        <small id="name_" style="display: none;color: #ff0000" class="form-text">thong bao loi o day
+                        </small>
+                        <input name="sdt" th:value="${userAbout.getSdt()}" type="number" class="form-control"
+                               id="phone" placeholder="Số điện thoại"/>
+                        <small id="phone_" style="display: none;color: red" class="form-text">thong bao loi o day
+                        </small>
+
+                    </div>
+                </form>
+                <button th:disabled="true" id="btn_save" type="btn" class="btn btn-success">Lưu thay đổi
+                </button>
+
+
+            </div>
+            <div class="col-5 about-me">
+                <form id="form_complete" th:action="@{/passwordChange}">
+                    <div class="form-group">
+                        <input name="passwordOld" type="password" class="form-control" id="password_old"
+                               placeholder="Nhập mật khẩu cũ"/>
+                        <small style="display: none;color: red" id="password_old_" class="form-text">Không được để trống
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <input name="newPassword" type="password" class="form-control" id="password_new"
+                               placeholder="Nhập mật khẩu mới"/>
+                        <small style="display: none;color: red" id="password_new_" class="form-text">Không được để trống
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <input name="password_confirm" type="password" class="form-control" id="password_confirm"
+                               placeholder="Xác nhận mật khẩu"/>
+                        <small style="display: none;color: red" id="password_confirm_" class="form-text">Không được để trống
+                        </small>
+                    </div>
+
+                </form>
+                <button th:disabled="true" id="btn_complete" type="submit" class="btn btn-success">Hoàn tất
+                </button>
+                <small style="display: none;color: red" id="checkAjax" class="form-text">Thông tin không đúng
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Footer-->
+<div th:replace="Home/footer ::footer"></div>
+<!--Footer-->
+<script th:src="@{js/about.js}">
+
+</script>
+</body>
+</html>

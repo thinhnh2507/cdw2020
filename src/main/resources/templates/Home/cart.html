@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Home/head :: head">
+</head>
+<body>
+<div th:replace="Home/header :: header"></div>
+<section class="product-cart-wrapper">
+    <div class="container">
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="row">
+                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-3">
+                        <div class="table-responsive">
+                            <table class="table" style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%; text-align: center;">Đồng Hồ</th>
+                                    <th style="width: 20%; text-align: center;">Tên</th>
+                                    <th style="width: 20%; text-align: center;">Giá</th>
+                                    <th style="width: 10%; text-align: center;">Số Lượng</th>
+                                    <th style="width: 20%; text-align: center;">Thành Tiền</th>
+                                    <th style="width: 10%; text-align: center;"></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:if="${session.cart.size() !=0}" th:each="c : ${session.cart}">
+                                    <td style="text-align: center;"><img style="height: 100px" th:src="'/images/'+${c.getSanPham().getImages().get(0).name_img}"></td>
+                                    <td style="text-align: center;" th:text="${c.getSanPham().tensanpham}"></td>
+                                    <td style="text-align: center;" th:text="${#numbers.formatInteger(c.getSanPham().giasanpham,3,'POINT')}+' VND'"></td>
+                                    <td style="text-align: center;" th:text="${c.getQuantity()}"></td>
+                                    <td style="text-align: center;" th:text="${#numbers.formatInteger(c.getSanPham().giasanpham*c.getQuantity(),3,'POINT')}+' VND'"></td>
+                                    <td style="text-align: center;"><a th:href="@{removeCart/{id}(id=${c.getSanPham().id})}">Xóa</a></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;"></td>
+                                    <td style="text-align: center;"></td>
+                                    <td style="text-align: center;"></td>
+                                    <td style="text-align: center;"></td>
+                                    <td style="text-align: center;">Tổng : </td>
+                                    <td style="text-align: center;width: 20%;" th:text="${#numbers.formatInteger(session.total,3,'POINT')}+' VND'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- End -->
+                    </div>
+                </div>
+                <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                    <div class="col-lg-6">
+                        <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Mã giảm giá</div>
+                        <div class="coupon-box">
+                            <p class="font-italic mb-4">Nếu bạn có mã giảm giá xin vui lòng nhập vào ô bên dưới.</p>
+                            <div class="input-group coupon-input mb-4 border rounded-pill p-2">
+                                <input type="text" placeholder="Nhập mã tại đây" aria-describedby="button-addon3" class="form-control border-0">
+                                <div class="input-group-append border-0">
+                                    <button id="button-addon3" type="button" class="button button-dark"><i class="fa fa-gift mr-2"></i>Xác nhận</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Hướng dẫn cho nhân viên bán hàng</div>
+                        <div class="coupon-box">
+                            <p class="font-italic mb-4">Nếu bạn có thông tin hướng dẫn cho người bán hàng, vui lòng nhập vào ô bên dưới</p>
+                            <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bg-light px-4 py-3 text-uppercase font-weight-bold">Giá trị đơn hàng (Tạm tính)</div>
+                        <div class="p-4">
+                            <p class="font-italic mb-4">Phí vận chuyển và chi phí bổ sung sẽ được tính dựa trên giá trị bạn đã nhập.</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng giá trị sản phẩm (tạm tính) </strong><strong th:text="${#numbers.formatInteger(session.total,3,'POINT')}+' VND'"></strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Phí vận chuyển</strong><strong>10.000 đ</strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Thuế</strong><strong th:text="${#numbers.formatInteger(session.total*10/100,3,'POINT')}+' VND'"></strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tổng cộng</strong>
+                                    <h5 class="font-weight-bold" th:text="${#numbers.formatInteger(session.total+(session.total*10/100)+10000,3,'POINT')}+' VND'" ></h5>
+                                </li>
+                            </ul>
+                            <div class="table">
+                                <!-- Modal add -->
+                                <div class="themsp" style="margin-bottom: 10px;">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                        Thanh Toán
+                                    </button>
+                                </div>
+
+                                <div class="modal" id="myModal">
+                                    <div class="modal-dialog modal-lg" >
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Xác nhận đặt hàng</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h6> Xác nhận đặt hàng , sẽ có nhân viên liên hệ đến bạn . Chuyển về trang chủ</h6>
+                                            </div>
+                                            <a th:href="@{/cart/thanhtoan}">
+                                                <button type="submit" class="btn btn-primary" style="float:right;">Xác Nhận</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="Home/footer :: footer"></div>
+</body>
+</html>

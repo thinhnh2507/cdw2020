@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin - Sản Phẩm</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+  <a class="navbar-brand mr-1" href="index.html">Admin</a>
+
+  <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+    <i class="fas fa-bars"></i>
+  </button>
+
+
+  <!-- Navbar -->
+  <ul class="navbar-nav ml-auto ml-md-0">
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-user-circle fa-fw"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="#">Settings</a>
+        <a class="dropdown-item" href="#">Activity Log</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+      </div>
+    </li>
+  </ul>
+
+</nav>
+
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Admin</span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Danh Mục</span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <a class="dropdown-item" th:href="@{/Admin/quanlydm}" >QL Danh Mục</a>
+        <a class="dropdown-item" th:href="@{/Admin/listSpByDmuc/{id}(id=${dmuc.id})}" th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}" ></a>
+
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/Admin/quanlysp}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Sản Phẩm</span></a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" th:href="@{/Admin/quanlyuser}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Thành Viên</span></a>
+    </li>
+  </ul>
+  <!--    content wrapper ,content sp-->
+  <div id="content-wrapper">
+    <div class="container-fluid" th:fragment="Sanpham_content">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Admin</a>
+        </li>
+        <li class="breadcrumb-item active">Sản Phẩm</li>
+      </ol>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="table">
+            <!-- Modal add -->
+            <div class="row">
+            <div class="themsp" style="margin-bottom: 10px;">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Thêm
+              </button>
+            </div>
+              <div class="search justify-content-end" style="margin-left: 700px">
+                <form class="form-inline pull-right"  method="GET">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="search"
+                           placeholder="Type employee name..." />
+                  </div>
+                  <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+              </div>
+            </div>
+            <div class="modal" id="myModal">
+              <div class="modal-dialog modal-lg" >
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Thêm Sản Phẩm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="/Admin/InsertSanPham" enctype="multipart/form-data" >
+                      <div class="form-group">
+                        <legend class="">Thêm</legend>
+                      </div>
+                      <div class="form-group">
+                        <!-- <label for="tensp">Tên Sản Phẩm</label> -->
+                        <input type="text" class="form-control" placeholder="Tên Sản Phẩm" name="tensanpham">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label for="pwd">Giá</label> -->
+                        <input type="text" class="form-control" placeholder="Giá" name="giasanpham">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label for="giamgia">Giảm Giá</label> -->
+                        <input type="text" class="form-control" placeholder="Giảm Giá" name="giamgia">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label for="mota">Mô Tả</label> -->
+                        <input type="text" class="form-control" placeholder="Mô Tả" name="motasanpham">
+                      </div>
+                      <div class="form-group">
+                        <!-- <label for="soluong">Số Lượng</label> -->
+                        <input type="text" class="form-control" placeholder="Số Lượng" name="soluong">
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control" name="id_danhmuc" >
+                          <option th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}"
+                                  th:value="${dmuc.id}"></option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <!--                      <input type="text" class="form-control" placeholder="Số Lượng" name="hinhsanpham">-->
+                        <label > Hình Ảnh</label>
+                        <input type="file" accept="image/*" name="hinhsanpham"  multiple />
+                      </div>
+                      <div class="form-group" style="padding-bottom: 10px;">
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="submit" class="btn btn-secondar">Làm Mới</div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- table sản phẩm -->
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+            <tr>
+              <th style="width: 20%;">Tên Sản Phẩm</th>
+              <th style="width: 12%;">Giá</th>
+              <th style="width: 9%;">Giảm Giá</th>
+              <th style="width: 20%;">Mô Tả</th>
+              <th style="width: 9%;">Số Lượng</th>
+              <th style="width: 15%;">Danh Mục</th>
+              <th style="width: 10%;"> </th>
+            </tr>
+            <tbody>
+            <tr  th:each="sp ,i : ${product.pageList}">
+              <td th:text="${sp.tensanpham}"></td>
+              <td th:text="${#numbers.formatInteger(sp.getGiasanpham(),3,'POINT')}+' VND'"></td>
+              <td th:text="${#numbers.formatInteger(sp.getGiamgia(),1,'POINT')}"></td>
+              <td th:text="${sp.motasanpham}"></td>
+              <td th:text="${#numbers.formatInteger(sp.getSoluong(),1,'POINT')}"></td>
+              <!--                    <td th:text="${sp.danhMuc.tendanhmuc}"></td>-->
+              <td style="height: 100px"><img style="height: 100%" th:src="'/images/'+ ${sp.getImages().get(0).getName_img()}"></td>
+              <td>
+                <!--button chi tiet-->
+                <a class="btn btn-success" th:href="@{/Admin/chitietsanpham/{id}(id=${sp.id})}"><i class="fa fa-search"></i></a>
+                <!--button xoa-->
+                <a class="btn btn-danger" th:href="@{/Admin/qlsp/{id}/delete(id=${sp.id})}"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="paging">
+            <ul class="pagination">
+              <li
+                      th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{/Admin/quanlysp}">First</a>
+              </li>
+              <li
+                      th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+                <a class="page-link" aria-label="Previous"
+                   th:href="@{|${baseUrl}${currentIndex - 1}|}"
+                   title='Go to previous page'><span aria-hidden="true">«</span>
+                  <span class="sr-only">Previous</span></a>
+              </li>
+              <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+                  th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+                <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
+                        th:text='${item}'>1</span>
+                </a>
+              </li>
+              <li
+                      th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+                <a class="page-link" aria-label="Next"
+                   th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
+                        aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+              </li>
+              <li
+                      th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+                <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright © Your Website 2020</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- /.content-wrapper -->
+  <!--    /content wrapper , contetn sp-->
+
+</div>
+<!-- /#wrapper -->
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+  <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+
+  <!-- Custom scripts for all pages -->
+  <script th:src="@{/js/sb-admin.min.js}"></script>
+
+  <!-- Demo scripts for this page-->
+  <!-- <script src="js/demo/datatables-demo.js"></script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Home/head :: head">
+
+</head>
+<body>
+<div th:replace="Home/header :: header"></div>
+<div class="product-detail-wrapper">
+ <div class="container">
+  <!-- Thông tin chi tiết cho sản phẩm -->
+  <div class="detail-zone">
+   <div class="product-left-zone">
+    <!-- Swiper -->
+    <div class="swiper-container product-gallery-top">
+     <div class="swiper-wrapper" id="zoom_01">
+      <div class="swiper-slide"><img th:src="'/images/'+${session.spById.getImages().get(0).getName_img()}" th:attr="data-zoom-image='/images/'+${session.spById.getImages().get(0).getName_img()}" class="img-fluid w-100" alt="Top"></div>
+      <div class="swiper-slide" th:each="img : ${session.spById.getImages()}">
+       <img th:src="'/images/'+${img.getName_img()}" class="img-fluid w-100" alt="Top">
+      </div>
+     </div>
+    </div>
+    <div id="zoom-preview"></div>
+    <div class="swiper-container product-gallery-thumbs">
+     <div class="swiper-wrapper">
+      <div class="swiper-slide" th:each="img: ${session.spById.getImages()}">
+       <img th:src="'/images/'+${img.getName_img()}" class="img-fluid w-100" alt="Thumb">
+      </div>
+     </div>
+     <!-- &lt;!&ndash; Add Arrows -->
+     <!--       <div class="swiper-button-next swiper-button-white"></div>-->
+     <!--       <div class="swiper-button-prev swiper-button-white"></div>&ndash;&gt;-->
+    </div>
+   </div>
+   <div class="product-right-zone">
+    <form action="#" method="GET">
+     <div class="product-info-wrapper">
+      <div class="product-basic-info">
+       <h1 class="product-name" th:text="${session.spById.getTensanpham()}">
+       </h1>
+       <p class="product-code" th:text="'Mã sản phẩm : '+${session.spById.getId()}">
+       </p>
+       <p class="product-price" th:text="${#numbers.formatInteger(session.spById.getGiasanpham(),3,'POINT')}+' VND'">
+       </p>
+      </div>
+      <div class="product-color-info">
+       <div class="color-product">
+        <label class="label-custom">Chọn màu sắc cho sản phẩm</label>
+        <div class="variant-select">
+         <radiogroup>
+          <input type="radio" id="black" name="variant-color">
+          <label for="black">
+           <div class="variant-select__colorbox black"></div>
+           <div class="variant-select__title">Black</div>
+          </label>
+
+          <input type="radio" id="red" name="variant-color">
+          <label for="red">
+           <div class="variant-select__colorbox red"></div>
+           <div class="variant-select__title">Red</div>
+          </label>
+
+          <input type="radio" id="blue" name="variant-color">
+          <label for="blue">
+           <div class="variant-select__colorbox blue"></div>
+           <div class="variant-select__title">Blue</div>
+          </label>
+
+          <input type="radio" id="silver" name="variant-color">
+          <label for="silver">
+           <div class="variant-select__colorbox silver"></div>
+           <div class="variant-select__title">Silver</div>
+          </label>
+
+          <input type="radio" id="white" name="variant-color">
+          <label for="white">
+           <div class="variant-select__colorbox white"></div>
+           <div class="variant-select__title">White</div>
+          </label>
+         </radiogroup>
+        </div>
+       </div>
+
+       <div class="size-product">
+        <label class="label-custom" for="product_size">Chọn kích thước cho sản phẩm</label>
+        <select class="wide" name="product_size" id="product_size">
+         <option value="A">A</option>
+         <option value="A">B</option>
+         <option value="A">C</option>
+         <option value="A">D</option>
+         <option value="A">E</option>
+         <option value="A">F</option>
+        </select>
+       </div>
+       <p class="product-description" th:text="${session.spById.getMotasanpham()}"></p>
+       <div class="product-action">
+        <a href="#" class="add-cart item_add">
+         <button type="button" class="button button-success"><i class="fas fa-cart-arrow-down"></i> Mua hàng</button>
+        </a>
+        <a th:href="@{/cart/addCart/{id}(id=${session.spById.getId()})}" class="add-cart item_add">
+         <button class="addtocart button button-light" type="button"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+        </a>
+       </div>
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+  <!-- Thông tin chi tiết cho sản phẩm -->
+
+  <!-- Bài viết cho sản phẩm -->
+  <div class="product-news-wrapper">
+   <h5>Mô tả sản phẩm</h5>
+   <section class="product-description">
+    <h5>RESPONSIVE RUNNING SHOES FEATURING DISNEY&#39;S GOOFY.</h5>
+
+    <p>Join Disney&#39;s Goofy as he tries to learn new sports in these adidas Ultraboost Running Shoes. Graphics on the textile upper feature the lovable cartoon dog practising karate, baseball, rock climbing, skating and surfing. Responsive cushioning returns energy to your stride with every footstrike for that I-could-run-forever feeling.</p>
+
+    <p><img alt="" th:src="'/images/'+${session.spById.getImages().get(0).getName_img()}" /></p>
+
+    <h5>SPECIFICATIONS</h5>
+
+    <ul>
+     <li>Regular fit</li>
+     <li>Lace closure</li>
+     <li>Graphic textile upper</li>
+     <li>Adaptive running shoes</li>
+    </ul>
+
+    <ul>
+     <li>Responsive Boost midsole</li>
+     <li>Color</li>
+     <li>Product code: FV6050</li>
+    </ul>
+   </section>
+  </div>
+  <!-- Bài viết cho sản phẩm -->
+
+  <div class="product-comment-wrapper">
+   <div class="___product_comment_list">
+
+    <!-- Phần comment sản phẩm -->
+    <div class="comments-container">
+     <h5>Nhận xét</h5>
+
+     <ul id="comments-list" class="comments-list">
+      <li>
+       <div class="comment-main-level">
+        <!-- Avatar -->
+        <div class="comment-avatar"><img src="http://dummyimage.com/60" alt=""></div>
+        <!-- Contenedor del Comentario -->
+        <div class="comment-box">
+         <div class="comment-head">
+          <h6 class="comment-name by-author"><a href="#">User Name</a></h6>
+          <span class="posted-time">Posted on 10-FEB-2015 12:00</span>
+          <i class="fa fa-reply"></i>
+          <i class="fa fa-heart"></i>
+         </div>
+         <div class="comment-content">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+          <div class="comment-open">
+           <a class="btn-reply">
+            <i class="fa fa-reply"></i>
+           </a>
+          </div>
+         </div>
+         <div class="comment-footer">
+          <div class="comment-form">
+           <textarea class="form-control" name="comment" id="comment-content"></textarea>
+           <div class="pull-right send-button">
+            <a class="btn-send">send</a>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+
+       <ul class="comments-list reply-list">
+        <li>
+
+         <div class="comment-avatar"><img src="http://dummyimage.com/60" alt=""></div>
+
+         <div class="comment-box">
+          <div class="comment-head">
+           <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6>
+           <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+           <i class="fa fa-reply"></i>
+           <i class="fa fa-heart"></i>
+          </div>
+          <div class="comment-content">
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+           <div class="comment-open">
+            <a class="btn-reply">
+             <i class="fa fa-reply"></i>
+            </a>
+           </div>
+          </div>
+          <div class="comment-footer">
+           <div class="comment-form">
+            <textarea class="form-control"></textarea>
+            <div class="pull-right send-button">
+             <a class="btn-send">send</a>
+            </div>
+           </div>
+          </div>
+         </div>
+        </li>
+
+        <li>
+
+         <div class="comment-avatar"><img src="http://dummyimage.com/60" alt=""></div>
+
+         <div class="comment-box">
+          <div class="comment-head">
+           <h6 class="comment-name by-author"><a href="#">User Name</a></h6>
+           <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+           <i class="fa fa-reply"></i>
+           <i class="fa fa-heart"></i>
+          </div>
+          <div class="comment-content">
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+           <div class="comment-open">
+            <a class="btn-reply">
+             <i class="fa fa-reply"></i>
+            </a>
+           </div>
+          </div>
+          <div class="comment-footer">
+           <div class="comment-form">
+            <textarea class="form-control"></textarea>
+            <div class="pull-right send-button">
+             <a class="btn-send">send</a>
+            </div>
+           </div>
+          </div>
+         </div>
+        </li>
+       </ul>
+      </li>
+
+      <li>
+       <div class="comment-main-level">
+
+        <div class="comment-avatar"><img src="http://dummyimage.com/60" alt=""></div>
+
+        <div class="comment-box">
+         <div class="comment-head">
+          <h6 class="comment-name"><a href="#">Lorena Rojero</a></h6>
+          <span class="posted-time">Posted on DD-MM-YYYY HH:MM</span>
+          <i class="fa fa-reply"></i>
+          <i class="fa fa-heart"></i>
+         </div>
+         <div class="comment-content">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+          <div class="comment-open">
+           <a class="btn-reply">
+            <i class="fa fa-reply"></i>
+           </a>
+          </div>
+         </div>
+         <div class="comment-footer">
+          <div class="comment-form">
+           <textarea class="form-control"></textarea>
+           <div class="pull-right send-button">
+            <a class="btn-send">send</a>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </li>
+     </ul>
+
+     <div class="product-comment-wrapper">
+      <div class="comment-boxform">
+       <h5>Thêm nhận xét</h5>
+       <form action="#">
+        <p class="email">
+         <input name="email" type="text" class="feedback-input" id="email" placeholder="Tên" />
+        </p>
+
+        <p class="text">
+         <textarea name="text" class="feedback-input" id="comment" rows="3" placeholder="Nội dung"></textarea>
+        </p>
+
+        <button class="button button-dark post-comment" type="submit">Đăng</button>
+       </form>
+      </div>
+     </div>
+    </div>
+    <!-- Phần comment sản phẩm -->
+
+
+    <!-- Sản phẩm liên quan -->
+    <div class="product-related">
+     <h5>Sản phẩm liên quan</h5>
+
+     <ul class="product-related-list">
+      <li class="product-related-item">
+       <div class="product-related-image">
+        <a href="javascript:;">
+         <img th:src="@{/images/related.jpg}" class="img-fluid" alt="Sản phẩm">
+        </a>
+       </div>
+       <div class="product-related-info">
+        <p class="product-related-name"><a href="javascript:;">Giày Bóng Đá Nam Biti's Hunter Football (Trắng)</a></p>
+        <p class="product-related-category"><a href="javascript:;">Giày đá bóng</a></p>
+        <p class="product-related-price">650,000 đ</p>
+       </div>
+      </li>
+      <li class="product-related-item">
+       <div class="product-related-image">
+        <a href="javascript:;">
+         <img th:src="@{/images/related.jpg}" class="img-fluid" alt="Sản phẩm">
+        </a>
+       </div>
+       <div class="product-related-info">
+        <p class="product-related-name"><a href="javascript:;">Giày Bóng Đá Nam Biti's Hunter Football (Trắng)</a></p>
+        <p class="product-related-category"><a href="javascript:;">Giày đá bóng</a></p>
+        <p class="product-related-price">650,000 đ</p>
+       </div>
+      </li>
+      <li class="product-related-item">
+       <div class="product-related-image">
+        <a href="javascript:;">
+         <img th:src="@{/images/related.jpg}" class="img-fluid" alt="Sản phẩm">
+        </a>
+       </div>
+       <div class="product-related-info">
+        <p class="product-related-name"><a href="javascript:;">Giày Bóng Đá Nam Biti's Hunter Football (Trắng)</a></p>
+        <p class="product-related-category"><a href="javascript:;">Giày đá bóng</a></p>
+        <p class="product-related-price">650,000 đ</p>
+       </div>
+      </li>
+      <li class="product-related-item">
+       <div class="product-related-image">
+        <a href="javascript:;">
+         <img th:src="@{/images/related.jpg}" class="img-fluid" alt="Sản phẩm">
+        </a>
+       </div>
+       <div class="product-related-info">
+        <p class="product-related-name"><a href="javascript:;">Giày Bóng Đá Nam Biti's Hunter Football (Trắng)</a></p>
+        <p class="product-related-category"><a href="javascript:;">Giày đá bóng</a></p>
+        <p class="product-related-price">650,000 đ</p>
+       </div>
+      </li>
+      <li class="product-related-item">
+       <div class="product-related-image">
+        <a href="javascript:;">
+         <img th:src="@{/images/related.jpg}" class="img-fluid" alt="Sản phẩm">
+        </a>
+       </div>
+       <div class="product-related-info">
+        <p class="product-related-name"><a href="javascript:;">Giày Bóng Đá Nam Biti's Hunter Football (Trắng)</a></p>
+        <p class="product-related-category"><a href="javascript:;">Giày đá bóng</a></p>
+        <p class="product-related-price">650,000 đ</p>
+       </div>
+      </li>
+     </ul>
+    </div>
+    <!-- Sản phẩm liên quan -->
+
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+<div th:replace="Home/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="Home/head :: head"></head>
+<body>
+<div th:replace="Home/header :: header"></div>
+<div class="page-content">
+    <div class="container">
+        <div class="register-wrapper">
+            <div class="register-form">
+                <div class="form-title">
+                    <a th:href="@{/register}">
+                        Đăng Kí <br> Tài khoản</a>
+                </div>
+
+                <div class="form-content">
+                    <form th:action="@{/login}"  action="/login" method="POST">
+                        <div class="form-group custom-form-group">
+                            <label><i class="fas fa-envelope  "></i> Username</label>
+                            <div class="input">
+                                <input type="text" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group custom-form-group">
+                            <label><i class="fa fa-lock"></i> Mật khẩu</label>
+                            <div class="input">
+                                <input type="password" name="password">
+                            </div>
+                        </div>
+
+                        <div class="form-action">
+                            <button type="submit"><i class="fa fa-check"></i> Đăng nhập</button>
+                        </div>
+                        <small style="color: #ff0000" id="message" th:text="${message}" class="form-text"></small>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="Home/footer :: footer"></div>
+
+</body>
+</html>
