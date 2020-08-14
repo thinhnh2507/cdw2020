@@ -71,26 +71,6 @@ public class CartController {
         }
         return "redirect:/cart/index";
     }
-////    add cart rest api
-//    @RequestMapping(value = "addCartAjax/{id}",method = RequestMethod.GET)
-//    public ResponseEntity<Cart> addCartAjax(@PathVariable("id") long id ,HttpSession session){
-//        if (session.getAttribute("cart") == null) {
-//            List<Cart> cart = new ArrayList<Cart>();
-//            cart.add(new Cart(sanPhamService.findById(id), 1));
-//            session.setAttribute("total",totalPrice(cart));
-//            session.setAttribute("cart", cart);
-//        } else {
-//            List<Cart> cart = (List<Cart>) session.getAttribute("cart");
-//            int index = this.exists(id, cart);
-//            if (index == -1) {
-//                cart.add(new Cart(sanPhamService.findById(id), 1));
-//            } else {
-//                int quantity = cart.get(index).getQuantity() + 1;
-//                cart.get(index).setQuantity(quantity);
-//            }
-//        }
-//        return new ResponseEntity<>();
-//    }
 
     @RequestMapping(value = "removeCart/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") Long id, HttpSession session) {

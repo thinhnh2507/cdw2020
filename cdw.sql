@@ -3,15 +3,15 @@
 
  Source Server         : thinhnh
  Source Server Type    : MySQL
- Source Server Version : 100411
+ Source Server Version : 100413
  Source Host           : localhost:3306
  Source Schema         : cdw
 
  Target Server Type    : MySQL
- Target Server Version : 100411
+ Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 08/08/2020 04:00:35
+ Date: 14/08/2020 04:14:14
 */
 
 SET NAMES utf8mb4;
@@ -30,24 +30,11 @@ CREATE TABLE `chitiethoadon`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKl6het11vcn4pd2c579fyvxf1q`(`id_hoadon`) USING BTREE,
   CONSTRAINT `FKl6het11vcn4pd2c579fyvxf1q` FOREIGN KEY (`id_hoadon`) REFERENCES `hoadon` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of chitiethoadon
 -- ----------------------------
-INSERT INTO `chitiethoadon` VALUES (8, 7, 52, 1, 2000000);
-INSERT INTO `chitiethoadon` VALUES (9, 7, 62, 1, 500000);
-INSERT INTO `chitiethoadon` VALUES (10, 8, 54, 1, 123000000);
-INSERT INTO `chitiethoadon` VALUES (11, 8, 67, 1, 1);
-INSERT INTO `chitiethoadon` VALUES (12, 9, 70, 1, 123123);
-INSERT INTO `chitiethoadon` VALUES (13, 10, 70, 2, 246246);
-INSERT INTO `chitiethoadon` VALUES (14, 11, 57, 1, 1000000);
-INSERT INTO `chitiethoadon` VALUES (15, 12, 59, 1, 100000000);
-INSERT INTO `chitiethoadon` VALUES (16, 13, 59, 1, 100000000);
-INSERT INTO `chitiethoadon` VALUES (17, 14, 67, 1, 1);
-INSERT INTO `chitiethoadon` VALUES (18, 14, 63, 2, 2);
-INSERT INTO `chitiethoadon` VALUES (19, 15, 62, 2, 1000000);
-INSERT INTO `chitiethoadon` VALUES (20, 16, 59, 1, 100000000);
 INSERT INTO `chitiethoadon` VALUES (24, 19, 52, 1, 2000000);
 INSERT INTO `chitiethoadon` VALUES (25, 20, 57, 1, 1000000);
 INSERT INTO `chitiethoadon` VALUES (26, 20, 59, 1, 100000000);
@@ -62,7 +49,7 @@ CREATE TABLE `danhmuc`  (
   `tendanhmuc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `motadanhmuc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_danhmuc`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of danhmuc
@@ -86,21 +73,11 @@ CREATE TABLE `hoadon`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKagf464jk4re83xp7freow7p0c`(`id_user`) USING BTREE,
   CONSTRAINT `FKagf464jk4re83xp7freow7p0c` FOREIGN KEY (`id_user`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hoadon
 -- ----------------------------
-INSERT INTO `hoadon` VALUES (7, 6, 'hcm', '099999', 2500000, NULL);
-INSERT INTO `hoadon` VALUES (8, 6, 'hcm', '099999', 123000000, NULL);
-INSERT INTO `hoadon` VALUES (9, 6, 'hcm', '099999', 123123, NULL);
-INSERT INTO `hoadon` VALUES (10, 6, 'hcm', '099999', 246246, NULL);
-INSERT INTO `hoadon` VALUES (11, 6, 'hcm', '099999', 1000000, NULL);
-INSERT INTO `hoadon` VALUES (12, 6, 'hcm', '099999', 100000000, NULL);
-INSERT INTO `hoadon` VALUES (13, 6, 'hcm', '099999', 100000000, NULL);
-INSERT INTO `hoadon` VALUES (14, 6, 'hcm', '099999', 3, NULL);
-INSERT INTO `hoadon` VALUES (15, 5, 'thu duc', '09090909', 1000000, NULL);
-INSERT INTO `hoadon` VALUES (16, 6, 'hcm', '099999', 100000000, NULL);
 INSERT INTO `hoadon` VALUES (19, 6, 'hcm', '099999', 2000000, 'user');
 INSERT INTO `hoadon` VALUES (20, 6, 'hcm', '099999', 101000000, 'user');
 INSERT INTO `hoadon` VALUES (21, 5, 'thu duc', '09090909', 500000, 'admin');
@@ -117,7 +94,7 @@ CREATE TABLE `images`  (
   INDEX `FKg9jm24huaujoorxialei7oqh0`(`id_sanpham`) USING BTREE,
   CONSTRAINT `FKg9jm24huaujoorxialei7oqh0` FOREIGN KEY (`id_sanpham`) REFERENCES `sanpham` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_img` FOREIGN KEY (`id_sanpham`) REFERENCES `sanpham` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of images
@@ -167,7 +144,7 @@ CREATE TABLE `role`  (
   `role_id` bigint(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -192,7 +169,7 @@ CREATE TABLE `sanpham`  (
   INDEX `FKrmvnv13cdp6uc63hcko2dcf71`(`id_danhmuc`) USING BTREE,
   CONSTRAINT `FKrmvnv13cdp6uc63hcko2dcf71` FOREIGN KEY (`id_danhmuc`) REFERENCES `danhmuc` (`id_danhmuc`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_1` FOREIGN KEY (`id_danhmuc`) REFERENCES `danhmuc` (`id_danhmuc`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sanpham
@@ -215,10 +192,25 @@ CREATE TABLE `test`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `test` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of test
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for thuonghieu
+-- ----------------------------
+DROP TABLE IF EXISTS `thuonghieu`;
+CREATE TABLE `thuonghieu`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_danhmuc` bigint(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of thuonghieu
 -- ----------------------------
 
 -- ----------------------------
@@ -234,13 +226,14 @@ CREATE TABLE `user`  (
   `diachi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `hovaten` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (5, 'admin', '$2a$10$ZubqXlkBw9JIpnUx3H1Mhul3TX1j4GVvFoUceZD5PDm353Syukgu6', 'admin', '09090909', 'thu duc', NULL);
 INSERT INTO `user` VALUES (6, 'user', '$2a$10$FkEP6SEDJ9rFybDHt/A44e0PYoLcPyN9wySr52VM1WQ4E2nztzYNW', 'user', '099999', 'hcm', NULL);
+INSERT INTO `user` VALUES (14, 'test', '$2a$10$pFvBGIyBiQoC66/3FjnQjOZHrEgsF0/ERZs/TkGw3rjaOK50cLtDu', '1', '1', '1', NULL);
 
 -- ----------------------------
 -- Table structure for user_role
@@ -251,12 +244,13 @@ CREATE TABLE `user_role`  (
   `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE,
   INDEX `FKa68196081fvovjhkek5m97n3y`(`role_id`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = FIXED;
 
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES (5, 1);
 INSERT INTO `user_role` VALUES (6, 2);
+INSERT INTO `user_role` VALUES (14, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

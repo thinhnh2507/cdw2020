@@ -86,7 +86,7 @@
                 <li class="breadcrumb-item">
                     <a href="#">Admin</a>
                 </li>
-                <li class="breadcrumb-item active">Thành Viên</li>
+                <li class="breadcrumb-item active">Hóa Đơn</li>
             </ol>
 
             <!-- DataTables Example -->
@@ -98,59 +98,58 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr >
+                                <th style="width: 10%">Id</th>
                                 <th style="width: 20%">Username</th>
-                                <th style="width: 20%">Tên</th>
-                                <th style="width: 15%">SDT</th>
+                                <th style="width: 20%">SDT</th>
                                 <th style="width: 20%">Địa Chỉ</th>
-                                <th style="width: 20%">Quyền</th>
+                                <th style="width: 20%">Tổng Tiền</th>
                                 <th style="width: 15%"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="u :${listuser.pageList}">
-                                <td th:text="${u.username}"></td>
-                                <td th:text="${u.ten}"></td>
-                                <td th:text="${u.sdt}"></td>
-                                <td th:text="${u.diachi}"></td>
-                                <td th:each="role:${u.getRoles()}" th:text="${role.getName()}"></td>
+                            <tr th:each="hd : ${listHoadon}">
+                                <td th:text="${hd.getId()}"></td>
+                                <td th:text="${hd.getUsername()}"></td>
+                                <td th:text="${hd.getSdt()}"></td>
+                                <td th:text="${soluong}"></td>
+                                <td th:text="${#numbers.formatInteger(hd.getTongtien(),3,'POINT')}+' VND'"></td>
                                 <td>
-                                    <!--button xoa-->
-                                    <a class="btn btn-danger" th:href="@{/Admin/qluser/{id}/delete(id=${u.getId()})}"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-success" ><i class="fa fa-search"></i></a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <div class="paging">
-                            <ul class="pagination">
-                                <li
-                                        th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
-                                    <a class="page-link" th:href="@{/Admin/quanlyuser}">First</a>
-                                </li>
-                                <li
-                                        th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
-                                    <a class="page-link" aria-label="Previous"
-                                       th:href="@{|${baseUrl}${currentIndex - 1}|}"
-                                       title='Go to previous page'><span aria-hidden="true">«</span>
-                                        <span class="sr-only">Previous</span></a>
-                                </li>
-                                <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
-                                    th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
-                                    <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
-                                            th:text='${item}'>1</span>
-                                    </a>
-                                </li>
-                                <li
-                                        th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
-                                    <a class="page-link" aria-label="Next"
-                                       th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
-                                            aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
-                                </li>
-                                <li
-                                        th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
-                                    <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
-                                </li>
-                            </ul>
-                        </div>
+<!--                        <div class="paging">-->
+<!--                            <ul class="pagination">-->
+<!--                                <li-->
+<!--                                        th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">-->
+<!--                                    <a class="page-link" th:href="@{/Admin/quanlyuser}">First</a>-->
+<!--                                </li>-->
+<!--                                <li-->
+<!--                                        th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">-->
+<!--                                    <a class="page-link" aria-label="Previous"-->
+<!--                                       th:href="@{|${baseUrl}${currentIndex - 1}|}"-->
+<!--                                       title='Go to previous page'><span aria-hidden="true">«</span>-->
+<!--                                        <span class="sr-only">Previous</span></a>-->
+<!--                                </li>-->
+<!--                                <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"-->
+<!--                                    th:class="${item == currentIndex ? 'page-item active' :'page-item' }">-->
+<!--                                    <a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span-->
+<!--                                            th:text='${item}'>1</span>-->
+<!--                                    </a>-->
+<!--                                </li>-->
+<!--                                <li-->
+<!--                                        th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">-->
+<!--                                    <a class="page-link" aria-label="Next"-->
+<!--                                       th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span-->
+<!--                                            aria-hidden="true">»</span> <span class="sr-only">Next</span></a>-->
+<!--                                </li>-->
+<!--                                <li-->
+<!--                                        th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">-->
+<!--                                    <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

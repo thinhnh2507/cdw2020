@@ -63,5 +63,10 @@ public class SanPhamServiceImpl implements SanPhamService{
         return sanPhamRepository.searchKey(keysearch);
     }
 
+    @Override
+    public List<SanPham> searchSp(String key) {
+        return sanPhamRepository.searchSP(key);
+    }
+
 
 }

@@ -1,15 +1,10 @@
 package com.example.CDWSecurity.controller;
 
-import com.example.CDWSecurity.model.DanhMuc;
-import com.example.CDWSecurity.model.Images;
-import com.example.CDWSecurity.model.SanPham;
-import com.example.CDWSecurity.model.User;
+import com.example.CDWSecurity.model.*;
+import com.example.CDWSecurity.repository.ChiTietHDRepository;
 import com.example.CDWSecurity.repository.RoleRepository;
 import com.example.CDWSecurity.repository.UserRepository;
-import com.example.CDWSecurity.service.DanhMucService;
-import com.example.CDWSecurity.service.ImagesService;
-import com.example.CDWSecurity.service.SanPhamService;
-import com.example.CDWSecurity.service.UserService;
+import com.example.CDWSecurity.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -43,6 +38,10 @@ public class AdminController {
     UserService userService;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    HoaDonService hoaDonService;
+    @Autowired
+    ChiTietHDRepository chiTietHDRepository;
 //        Controller Danh Muc
     @GetMapping("/quanlydm")
     public String showDanhMuc(Model model, HttpServletRequest request){
@@ -227,7 +226,7 @@ public class AdminController {
         return "redirect:/Admin/qluser/page/1";
     }
 
-    //        phan trang san pham
+    //        phan trang user
     @GetMapping("/qluser/page/{pageNumber}")
     public String showUserPage(HttpServletRequest request,
                                    @PathVariable int pageNumber, Model model, HttpSession session) {
@@ -268,47 +267,15 @@ public class AdminController {
 
         return "redirect:/Admin/quanlyuser";
     }
-//    end controller user
+    //    end controller user
 
-//    controller hoa don
-@GetMapping("/quanlyhoadon")
-    public String quanlyHD(Model model, HttpServletRequest request
-        , RedirectAttributes redirect) {
-        request.getSession().setAttribute("listHD", null);
-        return "redirect:/Admin/qlhd/page/1";
-}
+    //    controller hoa don
+    @RequestMapping(value = "/quanlyhoadon")
+    public String showHoaDon(Model model){
+        List<HoaDon> hoaDonList = hoaDonService.getAll();
 
-    //        phan trang user
-    @GetMapping("/qlhd/page/{pageNumber}")
-    public String showHDPage(HttpServletRequest request,
-                               @PathVariable int pageNumber, Model model, HttpSession session) {
-        PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("listHD");
-        int pagesize = 5;
-        List<User> list = userRepository.findAll();
-        System.out.println(list.size());
-        if (pages == null) {
-            pages = new PagedListHolder<>(list);
-            pages.setPageSize(pagesize);
-        } else {
-            final int goToPage = pageNumber - 1;
-            if (goToPage <= pages.getPageCount() && goToPage >= 0) {
-                pages.setPage(goToPage);
-            }
-        }
-        request.getSession().setAttribute("listHD", pages);
-        int current = pages.getPage() + 1;
-        int begin = Math.max(1, current - list.size());
-        int end = Math.min(begin + 5, pages.getPageCount());
-        int totalPageCount = pages.getPageCount();
-        String baseUrl = "/Admin/qlhd/page/";
-
-        model.addAttribute("beginIndex", begin);
-        model.addAttribute("endIndex", end);
-        model.addAttribute("currentIndex", current);
-        model.addAttribute("totalPageCount", totalPageCount);
-        model.addAttribute("baseUrl", baseUrl);
-        model.addAttribute("listHD", pages);
-        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
-        return "Admin/admin-hoadon";
+        model.addAttribute("listHoadon",hoaDonList);
+            return "Admin/admin-hoadon";
     }
+
 }

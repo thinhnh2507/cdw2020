@@ -14,4 +14,5 @@ public interface SanPhamService {
     List<SanPham> listSanPhamByDanhMuc(long id_danhmuc);
     public Long maxId();
     List<String> searchKey(String keysearch);
+    List<SanPham> searchSp (String key);
 }
