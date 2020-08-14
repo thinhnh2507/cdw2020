@@ -32,12 +32,13 @@
                 });
             </script>
 <!--            end-->
+
             <div class="right-menu menu">
                 <ul class="flex-menu">
                     <li class="search-form">
-                        <form action="#" method="GET">
+                        <form th:action="@{/searchsp}">
                             <div class="input">
-                                <input type="text" id="productName" placeholder="Tìm kiếm" >
+                                <input name="key" type="text" id="productName" placeholder="Tìm kiếm" >
                                 <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
@@ -59,6 +60,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a class="dropdown-item" th:href="@{/about}"><i class="fas fa-user-alt"></i> Thông tin tài khoản</a>
+                                        <a th:if="${#authentication.getName().contains('admin')}" class="dropdown-item" th:href="@{/Admin/quanlydm}"><i class="fas fa-user-alt"></i> Admin</a>
                                         <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
                                     </div>
                                 </div>

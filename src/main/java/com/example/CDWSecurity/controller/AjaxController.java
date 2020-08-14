@@ -1,5 +1,6 @@
 package com.example.CDWSecurity.controller;
 
+import com.example.CDWSecurity.model.SanPham;
 import com.example.CDWSecurity.model.User;
 import com.example.CDWSecurity.service.SanPhamService;
 import com.example.CDWSecurity.service.UserService;
@@ -25,9 +26,9 @@ public class AjaxController {
         return sanPhamService.searchKey(term);
     }
 
-    @RequestMapping("/searchUserData")
+    @RequestMapping(value = "/searchUserData",method = RequestMethod.POST)
     @ResponseBody
-    public List<User> searchUserByKey(@RequestParam(value = "key") String key){
-        return userService.searchUserByKey(key);
+    public List<SanPham> searchUserByKey(@RequestParam(value = "key") String key){
+        return sanPhamService.searchSp(key);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.CDWSecurity.controller;
 
 import com.example.CDWSecurity.model.Role;
+import com.example.CDWSecurity.model.SanPham;
 import com.example.CDWSecurity.model.User;
 import com.example.CDWSecurity.repository.RoleRepository;
 import com.example.CDWSecurity.repository.SanPhamRepository;
@@ -45,14 +46,6 @@ public class HomePageController {
             User user = userRepository.findByUsername(((UserDetails) principal).getUsername());
             session.setAttribute("user",user);
         }
-//        User user = new User();
-//        List<Role> roles = roleRepository.findAll();
-//        user.setUsername("thinh");
-//        user.setPassword(passwordEncoder.encode("1"));
-//        Set<Role> roleSet = new HashSet<Role>();
-//        roleSet.add(roles.get(1));
-//        user.setRoles(roleSet);
-//        userRepository.save(user);
         session.setAttribute("listDanhMuc",danhMucService.findAllDanhMuc());
         session.setAttribute("listSanPham",sanPhamRepository.findAll(PageRequest.of(0,5)));
         return "index";
@@ -65,7 +58,11 @@ public class HomePageController {
         session.setAttribute("listSanPham",sanPhamService.findAll());
         return "Home/detail-product";
     }
-
+    @GetMapping("/searchsp")
+    public String searchHome(@RequestParam(value = "key") String key ,Model model , HttpSession session){
+        session.setAttribute("searchSp",sanPhamService.searchSp(key));
+        return "Home/search";
+    }
 
 
 }
