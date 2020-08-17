@@ -19,6 +19,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -267,6 +268,59 @@ public class AdminController {
 
         return "redirect:/Admin/quanlyuser";
     }
+    // Set Role User
+    @GetMapping("/qluser/{id}/setadmin")
+    public String setAdmin(@PathVariable("id") long id){
+        User user = userService.findById(id);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName("ROLE_ADMIN"));
+        user.setRoles(roles);
+        userRepository.save(user);
+        return "redirect:/Admin/quanlyuser";
+    }
+    @GetMapping("/qluser/{id}/setuser")
+    public String setMember(@PathVariable("id") long id){
+        User user = userService.findById(id);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findByName("ROLE_MEMBER"));
+        user.setRoles(roles);
+        userRepository.save(user);
+        return "redirect:/Admin/quanlyuser";
+    }
+    //        phan trang user
+    @GetMapping("/qlhd/page/{pageNumber}")
+    public String showHDPage(HttpServletRequest request,
+                             @PathVariable int pageNumber, Model model, HttpSession session) {
+        PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("listHD");
+        int pagesize = 5;
+        List<User> list = userRepository.findAll();
+        System.out.println(list.size());
+        if (pages == null) {
+            pages = new PagedListHolder<>(list);
+            pages.setPageSize(pagesize);
+        } else {
+            final int goToPage = pageNumber - 1;
+            if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+                pages.setPage(goToPage);
+            }
+        }
+        request.getSession().setAttribute("listHD", pages);
+        int current = pages.getPage() + 1;
+        int begin = Math.max(1, current - list.size());
+        int end = Math.min(begin + 5, pages.getPageCount());
+        int totalPageCount = pages.getPageCount();
+        String baseUrl = "/Admin/qlhd/page/";
+
+        model.addAttribute("beginIndex", begin);
+        model.addAttribute("endIndex", end);
+        model.addAttribute("currentIndex", current);
+        model.addAttribute("totalPageCount", totalPageCount);
+        model.addAttribute("baseUrl", baseUrl);
+        model.addAttribute("listHD", pages);
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
+        return "Admin/admin-hoadon";
+    }
+
     //    end controller user
 
     //    controller hoa don

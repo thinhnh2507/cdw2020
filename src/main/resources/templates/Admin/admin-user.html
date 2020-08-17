@@ -99,12 +99,13 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr >
-                                <th style="width: 20%">Username</th>
-                                <th style="width: 20%">Tên</th>
-                                <th style="width: 15%">SDT</th>
-                                <th style="width: 20%">Địa Chỉ</th>
-                                <th style="width: 20%">Quyền</th>
-                                <th style="width: 15%"></th>
+                                <th style="width: 15%">Username</th>
+                                <th style="width: 15%">Tên</th>
+                                <th style="width: 10%">SDT</th>
+                                <th style="width: 15%">Địa Chỉ</th>
+                                <th style="width: 15%">Quyền</th>
+                                <th style="width: 20%">Set Role</th>
+                                <th style="width: 10%">Xóa</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -113,8 +114,15 @@
                                 <td th:text="${u.ten}"></td>
                                 <td th:text="${u.sdt}"></td>
                                 <td th:text="${u.diachi}"></td>
-                                <td th:each="role:${u.getRoles()}" th:text="${role.getName()}"></td>
+                                <td th:each="role:${u.getRoles()}" th:text="${role.getName()}">
+                                </td>
                                 <td>
+                                    <!--button role-->
+                                    <a class="btn btn-success" type="submit" th:href="@{/Admin/qluser/{id}/setadmin(id=${u.getId()})}">Set Admin</a>
+                                    <a class="btn btn-success" type="submit" th:href="@{/Admin/qluser/{id}/setuser(id=${u.getId()})}">Set Member</a>
+                                </td>
+                                <td>
+
                                     <!--button xoa-->
                                     <a class="btn btn-danger" th:href="@{/Admin/qluser/{id}/delete(id=${u.getId()})}"><i class="fas fa-trash"></i></a>
                                 </td>
