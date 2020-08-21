@@ -93,11 +93,11 @@
        </div>
        <p class="product-description" th:text="${session.spById.getMotasanpham()}"></p>
        <div class="product-action">
-        <a href="#" class="add-cart item_add">
-         <button type="button" class="button button-success"><i class="fas fa-cart-arrow-down"></i> Mua hàng</button>
-        </a>
+<!--        <a href="#" class="add-cart item_add">-->
+<!--         <button type="button" class="button button-success"><i class="fas fa-cart-arrow-down"></i> Mua hàng</button>-->
+<!--        </a>-->
         <a th:href="@{/cart/addCart/{id}(id=${session.spById.getId()})}" class="add-cart item_add">
-         <button class="addtocart button button-light" type="button"><i class="fas fa-cart-plus"></i> Thêm vào giỏ</button>
+         <button type="button" class="button button-success"><i class="fas fa-cart-arrow-down"></i> Thêm vào giỏ</button>
         </a>
        </div>
       </div>

@@ -107,6 +107,56 @@
                     }
                   })
                 })
+                var tensanpham = $("#tensanpham");
+                var tensanpham_ = $("#tensanpham_");
+                tensanpham.on("blur" ,function () {
+                  if(tensanpham.val()== ""){
+                    tensanpham_.css("display","");
+                    tensanpham_.css("color", "red");
+                  } else {
+                    tensanpham_.css("display", "none");
+                  }
+                })
+                var giasanpham = $("#giasanpham");
+                var giasanpham_ = $("#giasanpham_");
+                giasanpham.on("blur" ,function () {
+                  if(giasanpham.val()== ""){
+                    giasanpham_.css("display","");
+                    giasanpham_.css("color", "red");
+                  } else {
+                    giasanpham_.css("display", "none");
+                  }
+                })
+                var giamgia = $("#giamgia");
+                var giamgia_ = $("#giamgia_");
+                giamgia.on("blur" ,function () {
+                  if(giamgia.val()== ""){
+                    giamgia_.css("display","");
+                    giamgia_.css("color", "red");
+                  } else {
+                    giamgia_.css("display", "none");
+                  }
+                })
+                var mota = $("#mota");
+                var mota_ = $("#mota_");
+                mota.on("blur" ,function () {
+                  if(mota.val()== ""){
+                    mota_.css("display","");
+                    mota_.css("color", "red");
+                  } else {
+                    mota_.css("display", "none");
+                  }
+                })
+                var soluong = $("#soluong");
+                var soluong_ = $("#soluong_");
+                soluong.on("blur" ,function () {
+                  if(soluong.val()== ""){
+                    soluong_.css("display","");
+                    soluong_.css("color", "red");
+                  } else {
+                    soluong_.css("display", "none");
+                  }
+                })
               })
             </script>
 
@@ -125,23 +175,33 @@
                       </div>
                       <div class="form-group">
                         <!-- <label for="tensp">Tên Sản Phẩm</label> -->
-                        <input type="text" class="form-control" placeholder="Tên Sản Phẩm" name="tensanpham">
+                        <input type="text" class="form-control" placeholder="Tên Sản Phẩm" name="tensanpham" id="tensanpham">
+                        <small style="display: none" id="tensanpham_" class="form-text">Tên sản phẩm không được để
+                          trống</small>
                       </div>
                       <div class="form-group">
                         <!-- <label for="pwd">Giá</label> -->
-                        <input type="text" class="form-control" placeholder="Giá" name="giasanpham">
+                        <input type="text" class="form-control" placeholder="Giá" name="giasanpham" id="giasanpham">
+                        <small style="display: none" id="giasanpham_" class="form-text">Giá không được để
+                          trống</small>
                       </div>
                       <div class="form-group">
                         <!-- <label for="giamgia">Giảm Giá</label> -->
-                        <input type="text" class="form-control" placeholder="Giảm Giá" name="giamgia">
+                        <input type="text" class="form-control" placeholder="Giảm Giá" name="giamgia" id="giamgia">
+                        <small style="display: none" id="giamgia_" class="form-text">Giảm giá không được để
+                          trống</small>
                       </div>
                       <div class="form-group">
                         <!-- <label for="mota">Mô Tả</label> -->
-                        <input type="text" class="form-control" placeholder="Mô Tả" name="motasanpham">
+                        <input type="text" class="form-control" placeholder="Mô Tả" name="motasanpham" id="mota">
+                        <small style="display: none" id="mota_" class="form-text">Giảm giá không được để
+                          trống</small>
                       </div>
                       <div class="form-group">
                         <!-- <label for="soluong">Số Lượng</label> -->
-                        <input type="text" class="form-control" placeholder="Số Lượng" name="soluong">
+                        <input type="text" class="form-control" placeholder="Số Lượng" name="soluong" id="soluong">
+                        <small style="display: none" id="soluong_" class="form-text">Giảm giá không được để
+                          trống</small>
                       </div>
                       <div class="form-group">
                         <select class="form-control" name="id_danhmuc" id="comboboxDM" >
