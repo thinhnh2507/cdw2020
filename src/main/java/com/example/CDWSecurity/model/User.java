@@ -1,5 +1,7 @@
 package com.example.CDWSecurity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +24,7 @@ public class User {
     @Column(name = "diachi")
     private String diachi;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "HdByIdUser",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
     private List<HoaDon> hoaDonList;
 
@@ -33,6 +36,7 @@ public class User {
         this.hoaDonList = hoaDonList;
     }
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;

@@ -48,7 +48,7 @@ public class SanPham {
         this.images = images;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_danhmuc")
     private DanhMuc danhMuc;
 

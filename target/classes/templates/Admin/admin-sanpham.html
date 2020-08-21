@@ -15,6 +15,12 @@
 
   <!-- Custom styles for this template-->
   <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+          th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js}"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+        th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+          th:src="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js}"></script>
 
 </head>
 
@@ -49,36 +55,7 @@
 <div id="wrapper">
 
   <!-- Sidebar -->
-  <ul class="sidebar navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="index.html">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Admin</span>
-      </a>
-    </li>
-
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Danh Mục</span>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-        <a class="dropdown-item" th:href="@{/Admin/quanlydm}" >QL Danh Mục</a>
-        <a class="dropdown-item" th:href="@{/Admin/listSpByDmuc/{id}(id=${dmuc.id})}" th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}" ></a>
-
-      </div>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" th:href="@{/Admin/quanlysp}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Sản Phẩm</span></a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" th:href="@{/Admin/quanlyuser}">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Thành Viên</span></a>
-    </li>
-  </ul>
+  <ul th:replace="Admin/sidebar :: sidebar"></ul>
   <!--    content wrapper ,content sp-->
   <div id="content-wrapper">
     <div class="container-fluid" th:fragment="Sanpham_content">
@@ -89,6 +66,8 @@
         </li>
         <li class="breadcrumb-item active">Sản Phẩm</li>
       </ol>
+
+
 
       <div class="card mb-3">
         <div class="card-body">
@@ -110,6 +89,27 @@
                 </form>
               </div>
             </div>
+
+            <script type="text/javascript">
+              $(document).ready(function () {
+                $('#comboboxDM').on('change',function () {
+                  var id_danhmuc = $(this).val();
+                  $.ajax({
+                    type :'GET',
+                    url : "/listthbydanhmuc/" +id_danhmuc,
+                      dataType : 'json',
+                    success : function (result) {
+                      var s ='';
+                      for(var i = 0 ; i <result.length;i++){
+                        s += '<option value ="' + result[i].id +'">' + result[i].tenthuonghieu + '</option>';
+                      }
+                      $('#comboboxTH').html(s)
+                    }
+                  })
+                })
+              })
+            </script>
+
             <div class="modal" id="myModal">
               <div class="modal-dialog modal-lg" >
                 <div class="modal-content">
@@ -144,9 +144,15 @@
                         <input type="text" class="form-control" placeholder="Số Lượng" name="soluong">
                       </div>
                       <div class="form-group">
-                        <select class="form-control" name="id_danhmuc" >
+                        <select class="form-control" name="id_danhmuc" id="comboboxDM" >
+                            <option selected = "selected">Danh Mục</option>
                           <option th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}"
                                   th:value="${dmuc.id}"></option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control" name="id_thuonghieu" id="comboboxTH">
+                            <option selected = "selected">Thương Hiệu</option>
                         </select>
                       </div>
                       <div class="form-group">
@@ -262,8 +268,8 @@
   <script th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
   <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
 
-  <!-- Custom scripts for all pages -->
-  <script th:src="@{/js/sb-admin.min.js}"></script>
+<!--  &lt;!&ndash; Custom scripts for all pages &ndash;&gt;-->
+<!--  <script th:src="@{/js/sb-admin.min.js}"></script>-->
 
   <!-- Demo scripts for this page-->
   <!-- <script src="js/demo/datatables-demo.js"></script> -->

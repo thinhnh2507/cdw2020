@@ -21,7 +21,7 @@ public class HoaDon {
     @Column(name = "username")
     private String username;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user",insertable = false,updatable = false)
     private User HdByIdUser;
     public User getHdByIdUser() {
@@ -31,7 +31,7 @@ public class HoaDon {
         HdByIdUser = hdByIdUser;
     }
 
-    @OneToMany(mappedBy = "chiTietHDByHD",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "chiTietHDByHD",fetch = FetchType.LAZY,orphanRemoval = true)
     private List<ChiTietHoaDon> chiTietHoaDons;
 
     public List<ChiTietHoaDon> getChiTietHoaDons() {

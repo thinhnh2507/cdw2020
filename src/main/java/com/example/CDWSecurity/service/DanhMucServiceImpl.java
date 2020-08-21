@@ -26,11 +26,6 @@ public class DanhMucServiceImpl implements DanhMucService{
 
     @Override
     public void deleteDanhMuc(DanhMuc dmuc) {
-//        for(SanPham i : sanPhams){
-//         if(i.getDanhMuc().getId().equals(dmuc.getId())){
-//             i.setDanhMuc(null);
-//         }
-//        }
         danhMucRepository.delete(dmuc);
     }
 

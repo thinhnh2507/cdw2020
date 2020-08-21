@@ -59,7 +59,7 @@ public class HomePageController {
         return "Home/detail-product";
     }
     @GetMapping("/searchsp")
-    public String searchHome(@RequestParam(value = "key") String key ,Model model , HttpSession session){
+    public String searchHome(@RequestParam(value = "term") String key ,Model model , HttpSession session){
         session.setAttribute("searchSp",sanPhamService.searchSp(key));
         return "Home/search";
     }

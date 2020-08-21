@@ -21,7 +21,7 @@ public class ChiTietHoaDon {
     public ChiTietHoaDon() {
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_hoadon",insertable = false,updatable = false)
     private HoaDon chiTietHDByHD;
     public HoaDon getChiTietHDByHD() {

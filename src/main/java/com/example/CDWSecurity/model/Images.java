@@ -39,7 +39,7 @@ public class Images {
         this.id_sanpham = id_sanpham;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sanpham",insertable = false,updatable = false)
 
     public SanPham getImagesByIdSp() {

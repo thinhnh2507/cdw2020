@@ -1,7 +1,10 @@
 package com.example.CDWSecurity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "danhmuc",schema = "cdw")
@@ -34,7 +37,7 @@ public class DanhMuc {
     public void setMotadanhmuc(String motadanhmuc) {
         this.motadanhmuc = motadanhmuc;
     }
-
+    @JsonIgnore
     @OneToMany(mappedBy = "danhMuc",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
     private List<SanPham> sanPhams;
 
@@ -44,5 +47,16 @@ public class DanhMuc {
 
     public void setSanPhams(List<SanPham> sanPhams) {
         this.sanPhams = sanPhams;
+    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "danhMuc",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
+    private List<ThuongHieu> thuongHieus;
+
+    public List<ThuongHieu> getThuongHieus() {
+        return thuongHieus;
+    }
+
+    public void setThuongHieus(List<ThuongHieu> thuongHieus) {
+        this.thuongHieus = thuongHieus;
     }
 }

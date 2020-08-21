@@ -47,35 +47,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="index.html">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Admin</span>
-            </a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Danh Mục</span>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item" th:href="@{/Admin/quanlydm}" >QL Danh Mục</a>
-                <a class="dropdown-item" th:href="@{/Admin/listSpByDmuc/{id}(id=${dmuc.id})}" th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}" ></a>
-
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/Admin/quanlysp}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Sản Phẩm</span></a>
-        </li>
-        <li class="nav-item ">
-            <a class="nav-link" th:href="@{/Admin/quanlyuser}">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Thành Viên</span></a>
-        </li>
-    </ul>
+    <ul th:replace="Admin/sidebar :: sidebar"></ul>
     <!--    content wrapper ,content sp-->
     <div id="content-wrapper">
         <!--        <div th:replace="Admin/content-danhmuc :: danhmuc_content "></div>-->

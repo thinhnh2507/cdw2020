@@ -214,6 +214,7 @@ public class AdminController {
     public String chiTietSp(@PathVariable("id") long id , Model model){
         SanPham sanPham = sanPhamService.findById(id);
         model.addAttribute("chitietsp",sanPham);
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
         return  "Admin/admin-detail-product";
     }
 
@@ -327,7 +328,7 @@ public class AdminController {
     @RequestMapping(value = "/quanlyhoadon")
     public String showHoaDon(Model model){
         List<HoaDon> hoaDonList = hoaDonService.getAll();
-
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
         model.addAttribute("listHoadon",hoaDonList);
             return "Admin/admin-hoadon";
     }
