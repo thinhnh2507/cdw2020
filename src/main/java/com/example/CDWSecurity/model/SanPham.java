@@ -1,5 +1,6 @@
 package com.example.CDWSecurity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -48,6 +49,7 @@ public class SanPham {
         this.images = images;
     }
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_danhmuc")
     private DanhMuc danhMuc;

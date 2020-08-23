@@ -3,6 +3,7 @@ package com.example.CDWSecurity.controller;
 import com.example.CDWSecurity.model.*;
 import com.example.CDWSecurity.repository.ChiTietHDRepository;
 import com.example.CDWSecurity.repository.RoleRepository;
+import com.example.CDWSecurity.repository.SanPhamRepository;
 import com.example.CDWSecurity.repository.UserRepository;
 import com.example.CDWSecurity.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class AdminController {
     DanhMucService danhMucService;
     @Autowired
     SanPhamService sanPhamService;
+    @Autowired
+    SanPhamRepository sanPhamRepository;
     @Autowired
     ImagesService imagesService;
     @Autowired
@@ -217,7 +220,27 @@ public class AdminController {
         model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
         return  "Admin/admin-detail-product";
     }
+    // update sp
+    @RequestMapping(value = "/chitietsanpham/update/{id}",method = RequestMethod.POST)
+    public  String updateSanPham2(@PathVariable("id") long id,
+                                  @RequestParam("tensanpham")String tensanpham,
+                                  @RequestParam("giasanpham")float giasanpham,
+                                  @RequestParam("giamgia")float giamgia,
+                                  @RequestParam("motasanpham")String motasanpham,
+                                  @RequestParam("soluong")float soluong,
+                                  Model model){
 
+        SanPham sanPham = sanPhamService.findById(id);
+        sanPham.setTensanpham(tensanpham);
+        sanPham.setGiasanpham(giasanpham);
+        sanPham.setGiamgia(giamgia);
+        sanPham.setMotasanpham(motasanpham);
+        sanPham.setSoluong(soluong);
+        sanPhamRepository.save(sanPham);
+        model.addAttribute("chitietsp",sanPham);
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
+        return  "Admin/admin-detail-product";
+    }
 //    end controller san pham
 
 //    Controller User

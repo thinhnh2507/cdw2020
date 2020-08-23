@@ -1,5 +1,7 @@
 package com.example.CDWSecurity.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,7 +40,7 @@ public class Images {
     public void setId_sanpham(long id_sanpham) {
         this.id_sanpham = id_sanpham;
     }
-
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sanpham",insertable = false,updatable = false)
 

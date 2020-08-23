@@ -11,7 +11,7 @@
  Target Server Version : 100413
  File Encoding         : 65001
 
- Date: 14/08/2020 04:14:14
+ Date: 24/08/2020 01:30:58
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `chitiethoadon`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKl6het11vcn4pd2c579fyvxf1q`(`id_hoadon`) USING BTREE,
   CONSTRAINT `FKl6het11vcn4pd2c579fyvxf1q` FOREIGN KEY (`id_hoadon`) REFERENCES `hoadon` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of chitiethoadon
@@ -39,6 +39,8 @@ INSERT INTO `chitiethoadon` VALUES (24, 19, 52, 1, 2000000);
 INSERT INTO `chitiethoadon` VALUES (25, 20, 57, 1, 1000000);
 INSERT INTO `chitiethoadon` VALUES (26, 20, 59, 1, 100000000);
 INSERT INTO `chitiethoadon` VALUES (27, 21, 62, 1, 500000);
+INSERT INTO `chitiethoadon` VALUES (28, 22, 75, 1, 1000000);
+INSERT INTO `chitiethoadon` VALUES (29, 23, 82, 1, 245000);
 
 -- ----------------------------
 -- Table structure for danhmuc
@@ -73,7 +75,7 @@ CREATE TABLE `hoadon`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FKagf464jk4re83xp7freow7p0c`(`id_user`) USING BTREE,
   CONSTRAINT `FKagf464jk4re83xp7freow7p0c` FOREIGN KEY (`id_user`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hoadon
@@ -81,6 +83,8 @@ CREATE TABLE `hoadon`  (
 INSERT INTO `hoadon` VALUES (19, 6, 'hcm', '099999', 2000000, 'user');
 INSERT INTO `hoadon` VALUES (20, 6, 'hcm', '099999', 101000000, 'user');
 INSERT INTO `hoadon` VALUES (21, 5, 'thu duc', '09090909', 500000, 'admin');
+INSERT INTO `hoadon` VALUES (22, 6, 'hcm', '099999', 1000000, 'user');
+INSERT INTO `hoadon` VALUES (23, 5, 'thu duc', '09090909', 245000, 'admin');
 
 -- ----------------------------
 -- Table structure for images
@@ -94,15 +98,11 @@ CREATE TABLE `images`  (
   INDEX `FKg9jm24huaujoorxialei7oqh0`(`id_sanpham`) USING BTREE,
   CONSTRAINT `FKg9jm24huaujoorxialei7oqh0` FOREIGN KEY (`id_sanpham`) REFERENCES `sanpham` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_img` FOREIGN KEY (`id_sanpham`) REFERENCES `sanpham` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 93 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of images
 -- ----------------------------
-INSERT INTO `images` VALUES (57, 'dsc_0130_680d78ff57c846d5bf8edb58c2f6dbca_1024x1024.jpg', 74);
-INSERT INTO `images` VALUES (58, 'dsc_0131_df76de934869484c89323579b8db0157_1024x1024.jpg', 74);
-INSERT INTO `images` VALUES (59, 'dsc_0133_eceb5fdbac12408ea3b8ad90242ccf92_1024x1024.jpg', 74);
-INSERT INTO `images` VALUES (60, 'dsc_0134_6a4eb9bfb144401caf484e4a37d74c2c_1024x1024.jpg', 74);
 INSERT INTO `images` VALUES (61, 'dsmh03601__2__78b2ad04120943db9bea01d9cc14e94d_1024x1024.jpg', 75);
 INSERT INTO `images` VALUES (62, 'dsmh03601__3__ad797cc9fb1c42648a32a15dc78aed0c_1024x1024.jpg', 75);
 INSERT INTO `images` VALUES (63, 'dsmh03601__5__8719ed33bb77479ca3ec5a8a9b93db7c_1024x1024.jpg', 75);
@@ -135,6 +135,10 @@ INSERT INTO `images` VALUES (89, 'deb006900doo__1__8ffecb63a0e644228f126fe514c38
 INSERT INTO `images` VALUES (90, 'deb006900doo__2__59710823483747fc8f2a6b0121d2eb00_1024x1024.jpg', 82);
 INSERT INTO `images` VALUES (91, 'deb006900doo__3__cf5fc49cdf9f464cadf8d3fabbf4c6ef_1024x1024.jpg', 82);
 INSERT INTO `images` VALUES (92, 'deb006900doo__6__19ba4e8db4064fdc83ce596792a032ba_1024x1024.jpg', 82);
+INSERT INTO `images` VALUES (95, 'bnr-3.jpg', 86);
+INSERT INTO `images` VALUES (96, 'c-1.jpg', 86);
+INSERT INTO `images` VALUES (97, 'c-2.jpg', 86);
+INSERT INTO `images` VALUES (98, 'c-3.jpg', 86);
 
 -- ----------------------------
 -- Table structure for role
@@ -169,12 +173,11 @@ CREATE TABLE `sanpham`  (
   INDEX `FKrmvnv13cdp6uc63hcko2dcf71`(`id_danhmuc`) USING BTREE,
   CONSTRAINT `FKrmvnv13cdp6uc63hcko2dcf71` FOREIGN KEY (`id_danhmuc`) REFERENCES `danhmuc` (`id_danhmuc`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_1` FOREIGN KEY (`id_danhmuc`) REFERENCES `danhmuc` (`id_danhmuc`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sanpham
 -- ----------------------------
-INSERT INTO `sanpham` VALUES (74, 'Giày Chạy Bộ Phiên Bản Đặc Biệt Biti\'s Hunter Running x X-Men Go DSMH03901XMN', 999000, 10, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 20, 22);
 INSERT INTO `sanpham` VALUES (75, 'Giày Thể Thao Nữ Biti\'s Hunter Street Mid Kumquat Soda DSWH03601TRG (Trắng)', 1000000, 20, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 12, 23);
 INSERT INTO `sanpham` VALUES (76, 'Giày Thể Thao Nữ Biti\'s Hunter Street Mid Berry Soda DSWH03602HOG (Hồng)', 750000, 15, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 2, 23);
 INSERT INTO `sanpham` VALUES (77, 'Giày Thể Thao Nam Biti\'s Hunter Street Latte DSMH03700KEM (Kem)', 769000, 13, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 12, 22);
@@ -183,20 +186,7 @@ INSERT INTO `sanpham` VALUES (79, 'Giày Thể Thao Nữ Biti\'s Hunter Street M
 INSERT INTO `sanpham` VALUES (80, 'Giày Thể Thao Quai Dệt Trẻ Em Biti\'s DSB134800CAM (Cam)', 450000, 15, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 20, 24);
 INSERT INTO `sanpham` VALUES (81, 'Sandal Eva Phun Bé Trai Biti\'s DEB006900XAM (Xám)', 250000, 20, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 2, 25);
 INSERT INTO `sanpham` VALUES (82, 'Sandal Eva Phun Bé Trai Biti\'s DEB006900DOO (Đỏ)', 245000, 60, 'Chưa có mô tả cho sản phẩm này', '2020-08-07', 123, 25);
-
--- ----------------------------
--- Table structure for test
--- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `test` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of test
--- ----------------------------
+INSERT INTO `sanpham` VALUES (86, 'test11222233333', 11, 1223, '1223', '2020-08-22', 123, 22);
 
 -- ----------------------------
 -- Table structure for thuonghieu
@@ -204,14 +194,24 @@ CREATE TABLE `test`  (
 DROP TABLE IF EXISTS `thuonghieu`;
 CREATE TABLE `thuonghieu`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tenthuonghieu` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_danhmuc` bigint(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `FKr6onixjq1c9ts95nx8p1v5gjx`(`id_danhmuc`) USING BTREE,
+  CONSTRAINT `FKr6onixjq1c9ts95nx8p1v5gjx` FOREIGN KEY (`id_danhmuc`) REFERENCES `danhmuc` (`id_danhmuc`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of thuonghieu
 -- ----------------------------
+INSERT INTO `thuonghieu` VALUES (1, 'Adidas', 22);
+INSERT INTO `thuonghieu` VALUES (2, 'Nike', 22);
+INSERT INTO `thuonghieu` VALUES (3, 'Bitit\'s', 22);
+INSERT INTO `thuonghieu` VALUES (4, 'New Blance', 23);
+INSERT INTO `thuonghieu` VALUES (5, 'Puma', 23);
+INSERT INTO `thuonghieu` VALUES (6, 'Bata', 23);
+INSERT INTO `thuonghieu` VALUES (7, 'Sandal', 24);
+INSERT INTO `thuonghieu` VALUES (14, 'Dép', 24);
 
 -- ----------------------------
 -- Table structure for user
@@ -250,7 +250,7 @@ CREATE TABLE `user_role`  (
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES (5, 1);
-INSERT INTO `user_role` VALUES (6, 2);
-INSERT INTO `user_role` VALUES (14, 2);
+INSERT INTO `user_role` VALUES (6, 1);
+INSERT INTO `user_role` VALUES (14, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
