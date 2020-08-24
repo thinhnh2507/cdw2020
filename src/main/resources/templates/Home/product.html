@@ -165,15 +165,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <div class="product-list">
                 <ul class="nav nav-tabs product-menu">
-                    <li class="nav-item" th:each="dmuc : ${session.listdanhmuc}">
-                        <a class="nav-link" th:href="@{/Home/spbydm/{id}(id=${dmuc.getId()})}" th:text="${dmuc.getTendanhmuc()}"></a>
+                    <li class="nav-item" th:each="dmuc : ${session.listDanhMuc}">
+                        <a class="nav-link" th:href="@{/home/spbydm/{id}(id=${dmuc.getId()})}" role="tab" data-toggle="tab" th:text="${dmuc.getTendanhmuc()}"></a>
                     </li>
                 </ul>
+
+
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active show" id="man">
                         <div class="list_product man-product" id="showAll">
-                            <div class="product " th:each="sp : ${session.listSanPham}">
+                            <div class="product " th:each="sp : ${session.listspbydanhmuc}">
                                 <div class="thumbnail">
                                     <a href="javascript:void(0);">
                                         <a th:href="@{/Home/spById/{id}(id=${sp.getId()})}">
@@ -188,15 +190,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5"></div>
-                        <div class="col-2" style="padding:0 40px ">
-                            <button type="button" class="btn btn-success"  >
-                                <a style="color:#000000" id="showmore" th:href="@{/showmore}">Xem thêm</a>
-                            </button>
-                        </div>
-                        <div class="col-5"></div>
                     </div>
                 </div>
             </div>
