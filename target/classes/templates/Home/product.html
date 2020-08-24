@@ -165,7 +165,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <div class="product-list">
                 <ul class="nav nav-tabs product-menu">
-                    <li class="nav-item" th:each="dmuc : ${session.listDanhMuc}">
+                    <li class="nav-item" th:each="dmuc : ${session.listdanhmuc}">
                         <a class="nav-link" th:href="@{/home/spbydm/{id}(id=${dmuc.getId()})}" role="tab" data-toggle="tab" th:text="${dmuc.getTendanhmuc()}"></a>
                     </li>
                 </ul>

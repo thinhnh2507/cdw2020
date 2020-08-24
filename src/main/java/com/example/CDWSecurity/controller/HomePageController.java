@@ -83,14 +83,14 @@ public class HomePageController {
         }
         session.setAttribute("showmore", showmore);
         session.setAttribute("listSanPham", sps);
-        session.setAttribute("listdanhmuc", danhMucService.findAllDanhMuc());
+        session.setAttribute("listdanhmuc", danhMucRepository.findAll());
         return "index";
     }
 
     @GetMapping("/Home/spById/{id}")
     public String homeDetail(Model model , @PathVariable("id") long id,HttpSession session){
         session.setAttribute("spById",sanPhamService.findById(id));
-        session.setAttribute("listDanhMuc",danhMucService.findAllDanhMuc());
+        session.setAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
         session.setAttribute("listSanPham",sanPhamService.findAll());
         return "Home/detail-product";
     }
@@ -105,7 +105,7 @@ public class HomePageController {
         DanhMuc dmuc = danhMucService.findById(id);
         List<SanPham> list = dmuc.getSanPhams();
         session.setAttribute("listspbydanhmuc", list);
-        session.setAttribute("listdanhmuc", danhMucService.findAllDanhMuc());
+        session.setAttribute("listdanhmuc", danhMucRepository.findAll());
         return "Home/product";
     }
 
