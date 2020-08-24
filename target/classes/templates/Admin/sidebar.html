@@ -17,7 +17,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" th:href="@{/Admin/quanlydm}" >QL Danh Mục</a>
-            <a class="dropdown-item" th:href="@{/Admin/listSpByDmuc/{id}(id=${dmuc.id})}" th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}" ></a>
+            <a class="dropdown-item" th:href="@{/Admin/thbydmuc/{id}(id=${dmuc.id})}" th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}" ></a>
 
         </div>
     </li>

@@ -37,17 +37,17 @@ public class DanhMuc {
     public void setMotadanhmuc(String motadanhmuc) {
         this.motadanhmuc = motadanhmuc;
     }
-    @JsonIgnore
-    @OneToMany(mappedBy = "danhMuc",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
-    private List<SanPham> sanPhams;
-
-    public List<SanPham> getSanPhams() {
-        return sanPhams;
-    }
-
-    public void setSanPhams(List<SanPham> sanPhams) {
-        this.sanPhams = sanPhams;
-    }
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "danhMuc",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
+//    private List<SanPham> sanPhams;
+//
+//    public List<SanPham> getSanPhams() {
+//        return sanPhams;
+//    }
+//
+//    public void setSanPhams(List<SanPham> sanPhams) {
+//        this.sanPhams = sanPhams;
+//    }
     @JsonIgnore
     @OneToMany(mappedBy = "danhMuc",fetch = FetchType.LAZY,orphanRemoval = true,cascade = CascadeType.ALL)
     private List<ThuongHieu> thuongHieus;

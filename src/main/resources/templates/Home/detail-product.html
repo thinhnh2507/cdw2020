@@ -111,26 +111,10 @@
   <div class="product-news-wrapper">
    <h5>Mô tả sản phẩm</h5>
    <section class="product-description">
-    <h5>RESPONSIVE RUNNING SHOES FEATURING DISNEY&#39;S GOOFY.</h5>
-
-    <p>Join Disney&#39;s Goofy as he tries to learn new sports in these adidas Ultraboost Running Shoes. Graphics on the textile upper feature the lovable cartoon dog practising karate, baseball, rock climbing, skating and surfing. Responsive cushioning returns energy to your stride with every footstrike for that I-could-run-forever feeling.</p>
+    <p th:text="${session.spById.getMotasanpham()}"></p>
 
     <p><img alt="" th:src="'/images/'+${session.spById.getImages().get(0).getName_img()}" /></p>
 
-    <h5>SPECIFICATIONS</h5>
-
-    <ul>
-     <li>Regular fit</li>
-     <li>Lace closure</li>
-     <li>Graphic textile upper</li>
-     <li>Adaptive running shoes</li>
-    </ul>
-
-    <ul>
-     <li>Responsive Boost midsole</li>
-     <li>Color</li>
-     <li>Product code: FV6050</li>
-    </ul>
    </section>
   </div>
   <!-- Bài viết cho sản phẩm -->

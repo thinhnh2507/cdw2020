@@ -108,7 +108,8 @@
                             <h3>Tên Sản Phẩm : <strong style="color: red" th:text="${chitietsp.getTensanpham()}"></strong></h3>
                             <h3>Giá Sản Phẩm : <strong th:text="${#numbers.formatInteger(chitietsp.getGiasanpham(),3,'POINT')}+' VND'"></strong></h3>
                             <h3>Giảm Giá : <strong th:text="${#numbers.formatInteger(chitietsp.getGiamgia(),1,'POINT')}"></strong></h3>
-                            <h3>Danh Mục : <strong th:text="${chitietsp.getDanhMuc().getTendanhmuc()}"></strong></h3>
+                            <h3>Danh Mục : <strong th:text="${chitietsp.getThuongHieu().getDanhMuc().getTendanhmuc()}"></strong></h3>
+                            <h3>Thương Hiệu : <strong th:text="${chitietsp.getThuongHieu().getTenthuonghieu()}"></strong></h3>
                             <h3>Mô Tả Sản Phẩm : <strong th:text="${chitietsp.getMotasanpham()}"></strong></h3>
                             <h3>Số Lượng : <strong th:text="${#numbers.formatInteger(chitietsp.getSoluong(),1,'POINT')}"></strong></h3>
                         </div>

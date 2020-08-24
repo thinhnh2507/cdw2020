@@ -131,9 +131,7 @@
                                 <td th:text="${dm.motadanhmuc}"></td>
                                 <td>
                                     <!--button chi tiet-->
-                                    <a class="btn btn-success" href="#"><i class="fa fa-search"></i></a>
-                                    <!--button sua-->
-                                    <a class="btn btn-info" href="#"><i class="fas fa-pencil-alt"></i></a>
+                                    <a class="btn btn-success" th:href="@{/Admin/thbydmuc/{id}(id=${dm.id})}"><i class="fa fa-search"></i></a>
                                     <!--button xoa-->
                                     <a class="btn btn-danger" th:href="@{/Admin/qldm/{id}/delete(id=${dm.id})}"><i class="fas fa-trash"></i></a>
                                 </td>

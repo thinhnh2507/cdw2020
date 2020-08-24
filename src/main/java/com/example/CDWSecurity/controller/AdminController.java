@@ -1,10 +1,7 @@
 package com.example.CDWSecurity.controller;
 
 import com.example.CDWSecurity.model.*;
-import com.example.CDWSecurity.repository.ChiTietHDRepository;
-import com.example.CDWSecurity.repository.RoleRepository;
-import com.example.CDWSecurity.repository.SanPhamRepository;
-import com.example.CDWSecurity.repository.UserRepository;
+import com.example.CDWSecurity.repository.*;
 import com.example.CDWSecurity.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -22,7 +19,6 @@ import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("Admin")
@@ -46,6 +42,10 @@ public class AdminController {
     HoaDonService hoaDonService;
     @Autowired
     ChiTietHDRepository chiTietHDRepository;
+    @Autowired
+    ThuongHieuService thuongHieuService;
+    @Autowired
+    ThuongHieuRepository thuongHieuRepository;
 //        Controller Danh Muc
     @GetMapping("/quanlydm")
     public String showDanhMuc(Model model, HttpServletRequest request){
@@ -76,13 +76,6 @@ public class AdminController {
         int end = Math.min(begin + 5, pages.getPageCount());
         int totalPageCount = pages.getPageCount();
         String baseUrl = "/Admin/qldm/page/";
-//        session.setAttribute("beginIndex", begin);
-//        session.setAttribute("endIndex", end);
-//        session.setAttribute("currentIndex", current);
-//        session.setAttribute("totalPageCount", totalPageCount);
-//        session.setAttribute("baseUrl", baseUrl);
-//        session.setAttribute("categorys", pages);
-//        session.setAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
         model.addAttribute("beginIndex", begin);
         model.addAttribute("endIndex", end);
         model.addAttribute("currentIndex", current);
@@ -107,6 +100,13 @@ public class AdminController {
         danhMucService.insertDanhMuc(danhMuc);
         return "redirect:/Admin/quanlydm";
     }
+    @RequestMapping(value = "/thbydmuc/{id}")
+    public String thByDmuc(@PathVariable("id") long id ,HttpSession session , Model model){
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
+        session.setAttribute("thbydmuc",thuongHieuRepository.getthbydanhmuc(id));
+        return "Admin/admin-thuonghieu";
+    }
+
 //    end controller danh muc
 
 //    Controller San Pham
@@ -162,15 +162,20 @@ public class AdminController {
 
     //    insert san pham
     @PostMapping(value = "/InsertSanPham")
-    public String insertSanPham(@RequestParam("tensanpham")String tensanpham, @RequestParam("giasanpham")String giasanpham,
-                            @RequestParam("giamgia")String giamgia, @RequestParam("motasanpham")String motasanpham,
-                            @RequestParam("soluong")String soluong, @RequestParam("id_danhmuc")Long id_danhmuc,
-                            @RequestParam("hinhsanpham") MultipartFile[] files , Model model) {
+    public String insertSanPham(@RequestParam("tensanpham")String tensanpham,
+                                @RequestParam("giasanpham")String giasanpham,
+                                @RequestParam("giamgia")String giamgia,
+                                @RequestParam("motasanpham")String motasanpham,
+                                @RequestParam("soluong")String soluong,
+                                @RequestParam("id_danhmuc")Long id_danhmuc,
+                                @RequestParam("id_thuonghieu") Long id_thuonghieu,
+                                @RequestParam("hinhsanpham") MultipartFile[] files , Model model) {
         Calendar calendar = Calendar.getInstance();
-        DanhMuc danhMuc = danhMucService.findById(id_danhmuc);
+        ThuongHieu thuongHieu = thuongHieuService.findById(id_thuonghieu);
         SanPham sp = new SanPham(tensanpham,Float.parseFloat(giasanpham),Float.parseFloat(giamgia),
-            motasanpham,calendar.getTime(),Float.parseFloat(soluong),danhMuc);
+            motasanpham,calendar.getTime(),Float.parseFloat(soluong),thuongHieu);
         sanPhamService.insertSp(sp);
+
         Long idSpMax = sanPhamService.maxId();
         try {
             for (MultipartFile file : files) {
@@ -204,13 +209,13 @@ public class AdminController {
     }
 
 //    list san pham theo dnah muc
-    @RequestMapping("/listSpByDmuc/{id}")
+    @RequestMapping("/listSpByTH/{id}")
     public String listSpByDmuc(@PathVariable("id")long id,Model model){
-        DanhMuc dmuc = danhMucService.findById(id);
-        List<SanPham> list = dmuc.getSanPhams();
-        model.addAttribute("listspbydanhmuc",list);
+        ThuongHieu thuongHieu = thuongHieuService.findById(id);
+        List<SanPham> list = thuongHieu.getSanPhamList();
+        model.addAttribute("listspbyth",list);
         model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
-        return "Admin/admin-sanphambydanhmuc";
+        return "Admin/admin-sanphambythuonghieu";
     }
 //    chi tiet san pham
     @RequestMapping("/chitietsanpham/{id}")

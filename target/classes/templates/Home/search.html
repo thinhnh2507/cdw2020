@@ -166,17 +166,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             <div class="product-list">
                 <ul class="nav nav-tabs product-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab">Giày nam</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab">Giày nữ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab">Giày bé trai</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" data-toggle="tab">Giày bé gái</a>
+                    <li class="nav-item" th:each="dmuc : ${session.listdanhmuc}">
+                        <a class="nav-link" th:href="@{/Home/spbydm/{id}(id=${dmuc.getId_thuonghieu()})}" th:text="${dmuc.getTenthuonghieu()}"></a>
                     </li>
                 </ul>
 
@@ -193,7 +184,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-name" th:text="${sp.getTensanpham()}"></h3>
-                                    <p class="product-category" th:text="${sp.getDanhMuc().getTendanhmuc()}"></p>
+                                    <p class="product-category" th:text="${sp.getThuongHieu().getTenthuonghieu()}"></p>
                                     <p class="price" th:text="${#numbers.formatInteger(sp.getGiasanpham(),3,'POINT')}+' VND'"></p>
                                 </div>
                             </div>

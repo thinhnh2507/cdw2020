@@ -59,7 +59,7 @@ public class CartController {
             session.setAttribute("cart", cart);
         } else {
             List<Cart> cart = (List<Cart>) session.getAttribute("cart");
-            int index = this.exists(id, cart);
+            int index = this.checkExists(id, cart);
             if (index == -1) {
                 cart.add(new Cart(sanPhamService.findById(id), 1));
             } else {
@@ -75,14 +75,14 @@ public class CartController {
     @RequestMapping(value = "removeCart/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") Long id, HttpSession session) {
         List<Cart> cart = (List<Cart>) session.getAttribute("cart");
-        int index = this.exists(id, cart);
+        int index = this.checkExists(id, cart);
         cart.remove(index);
         session.setAttribute("total",totalPrice(cart));
         session.setAttribute("cart", cart);
         return "redirect:/cart/index";
     }
 
-    private int exists(Long id, List<Cart> cart) {
+    private int checkExists(Long id, List<Cart> cart) {
         for (int i = 0; i < cart.size(); i++) {
             if (cart.get(i).getSanPham().getId().equals(id)) {
                 return i;

@@ -33,7 +33,7 @@ public class SanPhamServiceImpl implements SanPhamService{
     public ResponseEntity<SanPham> insertSp(@RequestBody SanPham sp) {
         try {
             SanPham sanPham = sanPhamRepository.save(new SanPham(sp.getTensanpham(),sp.getGiasanpham(),sp.getGiamgia(),
-                    sp.getMotasanpham(),sp.getNgaythemsanpham(),sp.getSoluong(),sp.getDanhMuc()));
+                    sp.getMotasanpham(),sp.getNgaythemsanpham(),sp.getSoluong(),sp.getThuongHieu()));
             return new ResponseEntity<>(sanPham, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
@@ -42,7 +42,7 @@ public class SanPhamServiceImpl implements SanPhamService{
 
     @Override
     public void delete(SanPham sp) {
-        sp.setDanhMuc(null);
+        sp.setThuongHieu(null);
 
         sanPhamRepository.delete(sp);
 

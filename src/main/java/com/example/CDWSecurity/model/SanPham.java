@@ -49,31 +49,42 @@ public class SanPham {
         this.images = images;
     }
 
+//    @JsonIgnore
+//    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_danhmuc")
+//    private DanhMuc danhMuc;
+//
+//    public DanhMuc getDanhMuc() {
+//        return danhMuc;
+//    }
+//
+//    public void setDanhMuc(DanhMuc danhMuc) {
+//        this.danhMuc = danhMuc;
+//    }
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_danhmuc")
-    private DanhMuc danhMuc;
+    @JoinColumn(name = "id_thuonghieu")
+    private ThuongHieu thuongHieu;
 
-    public DanhMuc getDanhMuc() {
-        return danhMuc;
+    public ThuongHieu getThuongHieu() {
+        return thuongHieu;
     }
 
-    public void setDanhMuc(DanhMuc danhMuc) {
-        this.danhMuc = danhMuc;
+    public void setThuongHieu(ThuongHieu thuongHieu) {
+        this.thuongHieu = thuongHieu;
     }
-
 
     public SanPham() {
     }
 
-    public SanPham(String tensanpham, float giasanpham, float giamgia, String motasanpham, Date ngaythemsanpham, float soluong, DanhMuc danhMuc) {
+    public SanPham(String tensanpham, float giasanpham, float giamgia, String motasanpham, Date ngaythemsanpham, float soluong, ThuongHieu thuongHieu) {
         this.tensanpham = tensanpham;
         this.giasanpham = giasanpham;
         this.giamgia = giamgia;
         this.motasanpham = motasanpham;
         this.ngaythemsanpham = ngaythemsanpham;
         this.soluong = soluong;
-        this.danhMuc = danhMuc;
+        this.thuongHieu = thuongHieu;
     }
 
     public Long getId() {

@@ -59,75 +59,12 @@
                 <li class="breadcrumb-item">
                     <a href="#">Admin</a>
                 </li>
-                <li class="breadcrumb-item active" >Danh Mục</li>
+                <li class="breadcrumb-item active" >Thương Hiệu</li>
             </ol>
 
             <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-body">
-<!--                    <div class="table">-->
-<!--                        &lt;!&ndash; Modal add &ndash;&gt;-->
-<!--                        <div class="themsp" style="margin-bottom: 10px;">-->
-<!--                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">-->
-<!--                                Thêm-->
-<!--                            </button>-->
-<!--                        </div>-->
-
-<!--                        <div class="modal" id="myModal">-->
-<!--                            <div class="modal-dialog modal-lg" >-->
-<!--                                <div class="modal-content">-->
-<!--                                    &lt;!&ndash; Modal Header &ndash;&gt;-->
-<!--                                    <div class="modal-header">-->
-<!--                                        <h4 class="modal-title">Thêm Sản Phẩm</h4>-->
-<!--                                        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                                    </div>-->
-<!--                                    <div class="modal-body">-->
-<!--                                        <form method="POST" action="/InsertSanPham" enctype="multipart/form-data" >-->
-<!--                                            <div class="form-group">-->
-<!--                                                <legend class="">Thêm</legend>-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash; <label for="tensp">Tên Sản Phẩm</label> &ndash;&gt;-->
-<!--                                                <input type="text" class="form-control" placeholder="Tên Sản Phẩm" name="tensanpham">-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash; <label for="pwd">Giá</label> &ndash;&gt;-->
-<!--                                                <input type="text" class="form-control" placeholder="Giá" name="giasanpham">-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash; <label for="giamgia">Giảm Giá</label> &ndash;&gt;-->
-<!--                                                <input type="text" class="form-control" placeholder="Giảm Giá" name="giamgia">-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash; <label for="mota">Mô Tả</label> &ndash;&gt;-->
-<!--                                                <input type="text" class="form-control" placeholder="Mô Tả" name="motasanpham">-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash; <label for="soluong">Số Lượng</label> &ndash;&gt;-->
-<!--                                                <input type="text" class="form-control" placeholder="Số Lượng" name="soluong">-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                <select class="form-control" name="id_danhmuc" >-->
-<!--                                                    <option th:each="dmuc , i : ${listdanhmuc}" th:text="${dmuc.tendanhmuc}"-->
-<!--                                                            th:value="${dmuc.id}"></option>-->
-<!--                                                </select>-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">-->
-<!--                                                &lt;!&ndash;                      <input type="text" class="form-control" placeholder="Số Lượng" name="hinhsanpham">&ndash;&gt;-->
-<!--                                                <label > Hình Ảnh</label>-->
-<!--                                                <input type="file" accept="image/*" name="hinhsanpham"  multiple />-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group" style="padding-bottom: 10px;">-->
-<!--                                                <button type="submit" class="btn btn-primary">Thêm</button>-->
-<!--                                                <button type="submit" class="btn btn-secondar">Làm Mới</div>-->
-<!--                                    </div>-->
-<!--                                    </form>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
 
                     <!-- table sản phẩm -->
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
@@ -137,22 +74,20 @@
                             <th style="width: 9%;">Giảm Giá</th>
                             <th style="width: 20%;">Mô Tả</th>
                             <th style="width: 9%;">Số Lượng</th>
-                            <th style="width: 15%;">Danh Mục</th>
+                            <th style="width: 15%;">Thương Hiệu</th>
                             <th style="width: 15%;"> </th>
                         </tr>
                         <tbody>
-                        <tr  th:each="sp,i:${listspbydanhmuc}">
-                            <td th:text="${sp.tensanpham}"></td>
-                            <td th:text="${sp.giasanpham}"></td>
-                            <td th:text="${sp.giamgia}"></td>
-                            <td th:text="${sp.motasanpham}"></td>
-                            <td th:text="${sp.soluong}"></td>
-                            <td th:text="${sp.danhMuc.tendanhmuc}"></td>
+                        <tr  th:each="sp,i:${listspbyth}">
+                            <td th:text="${sp.getTensanpham()}"></td>
+                            <td th:text="${sp.getGiasanpham()}"></td>
+                            <td th:text="${sp.getGiamgia()}"></td>
+                            <td th:text="${sp.getMotasanpham()}"></td>
+                            <td th:text="${sp.getSoluong()}"></td>
+                            <td th:text="${sp.getThuongHieu().getTenthuonghieu()}"></td>
                             <td>
                                 <!--button chi tiet-->
-                                <a class="btn btn-success" href="#"><i class="fa fa-search"></i></a>
-                                <!--button sua-->
-                                <a class="btn btn-info" href="#"><i class="fas fa-pencil-alt"></i></a>
+                                <a class="btn btn-success" th:href="@{/Admin/chitietsanpham/{id}(id=${sp.id})}"><i class="fa fa-search"></i></a>
                                 <!--button xoa-->
                                 <a class="btn btn-danger" th:href="@{/Admin/qlsp/{id}/delete(id=${sp.id})}"><i class="fas fa-trash"></i></a>
                             </td>

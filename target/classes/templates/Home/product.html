@@ -166,7 +166,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="product-list">
                 <ul class="nav nav-tabs product-menu">
                     <li class="nav-item" th:each="dmuc : ${session.listdanhmuc}">
-                        <a class="nav-link" th:href="@{/home/spbydm/{id}(id=${dmuc.getId()})}" role="tab" data-toggle="tab" th:text="${dmuc.getTendanhmuc()}"></a>
+                        <a class="nav-link" th:href="@{/Home/spbydm/{id}(id=${dmuc.getId_thuonghieu()})}" th:text="${dmuc.getTenthuonghieu()}"></a>
                     </li>
                 </ul>
 
@@ -185,7 +185,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 </div>
                                 <div class="product-info">
                                     <h3 class="product-name" th:text="${sp.getTensanpham()}"></h3>
-                                    <p class="product-category" th:text="${sp.getDanhMuc().getTendanhmuc()}"></p>
+                                    <p class="product-category" th:text="${sp.getThuongHieu().getDanhMuc().getTendanhmuc()}"></p>
                                     <p class="price" th:text="${sp.getGiasanpham()}"></p>
                                 </div>
                             </div>
