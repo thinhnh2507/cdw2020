@@ -142,19 +142,15 @@ public class UserController {
     }
 
     //ajaxCompeletePassword
-    @RequestMapping(value = "/ajaxChangePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/changepass", method = RequestMethod.POST)
     public @ResponseBody
-    String ajaxCompletePassword(@RequestParam(value = "passwordOld") String passwordOld) {
+    String ajaxCompletePassword(@RequestParam(value = "oldPassword") String oldPassword) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             String username = ((UserDetails) principal).getUsername();
             User userModel = userRepository.findByUsername(username);
             //kiem tra mat khau cu va mat khau moi
-//            boolean check = passwordEncoder.matches(passwordOld, userModel.getPassword());
-//            if(check) return "success";
-            boolean check = false;
-            if(passwordEncoder.encode(passwordOld).equals(userModel.getPassword())){
-                check = true;
+            if(passwordEncoder.encode(oldPassword).equalsIgnoreCase(userModel.getPassword())){
                 return "success";
             }
         }
