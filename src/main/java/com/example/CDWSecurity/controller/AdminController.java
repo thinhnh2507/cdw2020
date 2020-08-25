@@ -41,6 +41,8 @@ public class AdminController {
     @Autowired
     HoaDonService hoaDonService;
     @Autowired
+    HoaDonRepository hoaDonRepository;
+    @Autowired
     ChiTietHDRepository chiTietHDRepository;
     @Autowired
     ThuongHieuService thuongHieuService;
@@ -58,7 +60,7 @@ public class AdminController {
     public String showEmployeePage(HttpServletRequest request,HttpSession session,
                                    @PathVariable int pageNumber, Model model) {
         PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("listdm");
-        int pagesize = 3;
+        int pagesize = 4;
         List<DanhMuc> list =(List<DanhMuc>) danhMucService.findAllDanhMuc();
         System.out.println(list.size());
         if (pages == null) {
@@ -73,7 +75,7 @@ public class AdminController {
         request.getSession().setAttribute("listdm", pages);
         int current = pages.getPage() + 1;
         int begin = Math.max(1, current - list.size());
-        int end = Math.min(begin + 5, pages.getPageCount());
+        int end = Math.min(begin + 4, pages.getPageCount());
         int totalPageCount = pages.getPageCount();
         String baseUrl = "/Admin/qldm/page/";
         model.addAttribute("beginIndex", begin);
@@ -360,5 +362,14 @@ public class AdminController {
         model.addAttribute("listHoadon",hoaDonList);
             return "Admin/admin-hoadon";
     }
+    @RequestMapping(value = "/chitiethoadon/{id}")
+    public String showChitetHD(@PathVariable("id")long id, Model model){
+        HoaDon hoaDon = hoaDonService.findById(id);
+        List<ChiTietHoaDon> chiTietHoaDons = hoaDon.getChiTietHoaDons();
+        model.addAttribute("listdanhmuc",danhMucService.findAllDanhMuc());
+        model.addAttribute("chitiethoadon",chiTietHoaDons);
+        return "Admin/admin-detail-hoadon";
+    }
+
 
 }

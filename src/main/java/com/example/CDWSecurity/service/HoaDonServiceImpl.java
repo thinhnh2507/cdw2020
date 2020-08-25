@@ -28,4 +28,9 @@ public class HoaDonServiceImpl implements HoaDonService{
     public List<HoaDon> getAll() {
         return hoaDonRepository.findAll();
     }
+
+    @Override
+    public HoaDon findById(long id) {
+        return hoaDonRepository.findById(id).get();
+    }
 }

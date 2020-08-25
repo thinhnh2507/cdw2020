@@ -184,7 +184,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <div class="product-info">
                                     <h3 class="product-name" th:text="${sp.getTensanpham()}"></h3>
                                     <p class="product-category" th:text="${sp.getThuongHieu().getDanhMuc().getTendanhmuc()}"></p>
-                                    <p class="price" th:text="${sp.getGiasanpham()}"></p>
+                                    <p class="price" th:text="${#numbers.formatInteger(sp.getGiasanpham(),3,'POINT')}+' VND'"></p>
                                 </div>
                             </div>
                         </div>

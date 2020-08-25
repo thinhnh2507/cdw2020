@@ -6,6 +6,7 @@ import com.example.CDWSecurity.service.DanhMucService;
 import com.example.CDWSecurity.service.SanPhamService;
 import com.example.CDWSecurity.service.ThuongHieuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,8 +48,8 @@ public class HomePageController {
             User user = userRepository.findByUsername(((UserDetails) pricipal).getUsername());
             session.setAttribute("user", user);
         }
-        List<DanhMuc> test = danhMucRepository.findAll();
-        session.setAttribute("listdanhmuc", thuongHieuService.findAllTh());
+        Page<ThuongHieu> thpage = thuongHieuRepository.findAll(PageRequest.of(0,8));
+        session.setAttribute("listdanhmuc", thpage);
         List<SanPham> sanPhamList = sanPhamService.findAll();
         List<SanPham> sps = new ArrayList<>();
 
@@ -79,20 +80,23 @@ public class HomePageController {
         }
         session.setAttribute("showmore", showmore);
         session.setAttribute("listSanPham", sps);
-        session.setAttribute("listdanhmuc", thuongHieuService.findAllTh());
+        Page<ThuongHieu> thpage = thuongHieuRepository.findAll(PageRequest.of(0,8));
+        session.setAttribute("listdanhmuc", thpage);
         return "index";
     }
 
     @GetMapping("/Home/spById/{id}")
     public String homeDetail(Model model , @PathVariable("id") long id,HttpSession session){
         session.setAttribute("spById",sanPhamService.findById(id));
-        session.setAttribute("listdanhmuc",thuongHieuService.findAllTh());
+        Page<ThuongHieu> thpage = thuongHieuRepository.findAll(PageRequest.of(0,8));
+        session.setAttribute("listdanhmuc", thpage);
         session.setAttribute("listSanPham",sanPhamService.findAll());
         return "Home/detail-product";
     }
     @GetMapping("/searchsp")
     public String searchHome(@RequestParam(value = "term") String key ,Model model , HttpSession session){
-        session.setAttribute("listdanhmuc", thuongHieuService.findAllTh());
+        Page<ThuongHieu> thpage = thuongHieuRepository.findAll(PageRequest.of(0,8));
+        session.setAttribute("listdanhmuc", thpage);
         session.setAttribute("searchSp",sanPhamService.searchSp(key));
         return "Home/search";
     }
@@ -102,7 +106,8 @@ public class HomePageController {
         ThuongHieu thuongHieu = thuongHieuService.findById(id);
         List<SanPham> sanPhams = thuongHieu.getSanPhamList();
         session.setAttribute("listspbydanhmuc",sanPhams);
-        session.setAttribute("listdanhmuc", thuongHieuService.findAllTh());
+        Page<ThuongHieu> thpage = thuongHieuRepository.findAll(PageRequest.of(0,8));
+        session.setAttribute("listdanhmuc", thpage);
         return "Home/product";
     }
 

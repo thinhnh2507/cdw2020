@@ -8,4 +8,5 @@ public interface HoaDonService {
     HoaDon create(HoaDon hoaDon);
     long maxId();
     List<HoaDon> getAll();
+    HoaDon findById(long id);
 }

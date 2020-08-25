@@ -11,14 +11,23 @@ public class ChiTietHoaDon {
     private long id ;
     @Column(name = "id_hoadon")
     private long id_hoadon;
-    @Column(name = "id_sanpham")
-    private long id_sanpham;
     @Column(name = "soluong")
     private float soluong;
     @Column(name = "giaban")
     private float giaban;
 
     public ChiTietHoaDon() {
+    }
+    @OneToOne
+    @JoinColumn(name = "id_sanpham")
+    SanPham sanPham;
+
+    public SanPham getSanPham() {
+        return sanPham;
+    }
+
+    public void setSanPham(SanPham sanPham) {
+        this.sanPham = sanPham;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,12 +41,6 @@ public class ChiTietHoaDon {
         this.chiTietHDByHD = chiTietHDByHD;
     }
 
-    public ChiTietHoaDon(long id_hoadon, long id_sanpham, float soluong, float giaban) {
-        this.id_hoadon = id_hoadon;
-        this.id_sanpham = id_sanpham;
-        this.soluong = soluong;
-        this.giaban = giaban;
-    }
 
     public long getId() {
         return id;
@@ -55,13 +58,6 @@ public class ChiTietHoaDon {
         this.id_hoadon = id_hoadon;
     }
 
-    public long getId_sanpham() {
-        return id_sanpham;
-    }
-
-    public void setId_sanpham(long id_sanpham) {
-        this.id_sanpham = id_sanpham;
-    }
 
     public float getSoluong() {
         return soluong;

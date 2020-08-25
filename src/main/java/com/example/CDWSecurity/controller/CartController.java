@@ -3,6 +3,7 @@ package com.example.CDWSecurity.controller;
 import com.example.CDWSecurity.model.ChiTietHoaDon;
 import com.example.CDWSecurity.model.HoaDon;
 import com.example.CDWSecurity.model.Cart;
+import com.example.CDWSecurity.model.SanPham;
 import com.example.CDWSecurity.repository.DanhMucRepository;
 import com.example.CDWSecurity.repository.SanPhamRepository;
 import com.example.CDWSecurity.repository.UserRepository;
@@ -111,14 +112,15 @@ public class CartController {
         for(Cart item :cart){
             tongtien += ((item.getSanPham().getGiasanpham())*item.getQuantity());
         }
-        hoaDon.setTongtien(tongtien);
+        hoaDon.setTongtien(tongtien+(tongtien * 10/100)+10000);
         hoaDonService.create(hoaDon);
         long idhd = hoaDonService.maxId();
 
         for(Cart item : cart){
             ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
             chiTietHoaDon.setId_hoadon(idhd);
-            chiTietHoaDon.setId_sanpham(item.getSanPham().getId());
+            SanPham sanPham = sanPhamService.findById(item.getSanPham().getId());
+            chiTietHoaDon.setSanPham(sanPham);
             chiTietHoaDon.setSoluong(item.getQuantity());
             chiTietHoaDon.setGiaban((item.getSanPham().getGiasanpham())*item.getQuantity());
             chiTietHdService.create(chiTietHoaDon);

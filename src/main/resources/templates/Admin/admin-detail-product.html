@@ -122,12 +122,13 @@
                                 <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Thêm Sản Phẩm</h4>
+                                        <h4 class="modal-title">Sửa</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-<!--                                        th:action="@{/chitietsanpham/update/{id}(id=${chitietsp.getId()})}"-->
-                                        <form id="formupdate" method="POST" name="dataform" enctype="multipart/form-data" >
+
+                                        <form id="formupdate" method="POST" name="dataform" enctype="multipart/form-data"
+                                              th:action="@{/chitietsanpham2/update/{id}(id=${chitietsp.getId()})}">
                                             <div class="form-group">
                                                 <legend class="">Sửa</legend>
                                             </div>
@@ -136,38 +137,38 @@
                                                        th:value="${chitietsp.getId()}">
                                             </div>
                                             <div class="form-group">
-                                                <!-- <label for="tensp">Tên Sản Phẩm</label> -->
+                                                 <label>Tên Sản Phẩm</label>
                                                 <input type="text" class="form-control" placeholder="Tên Sản Phẩm" name="tensanpham" id="tensanpham"
                                                 th:value="${chitietsp.getTensanpham()}">
                                                 <small style="display: none" id="tensanpham_" class="form-text">Tên sản phẩm không được để
                                                     trống</small>
                                             </div>
                                             <div class="form-group">
-                                                <!-- <label for="pwd">Giá</label> -->
+                                                 <label>Giá</label>
                                                 <input type="text" class="form-control" placeholder="Giá" name="giasanpham" id="giasanpham"
                                                        th:value="${#numbers.formatInteger(chitietsp.getGiasanpham(),3,'POINT')}">
                                                 <small style="display: none" id="giasanpham_" class="form-text">Giá không được để
                                                     trống</small>
                                             </div>
                                             <div class="form-group">
-                                                <!-- <label for="giamgia">Giảm Giá</label> -->
+                                                 <label >Giảm Giá</label>
                                                 <input type="text" class="form-control" placeholder="Giảm Giá" name="giamgia" id="giamgia"
                                                        th:value="${#numbers.formatInteger(chitietsp.getGiamgia(),3,'POINT')}">
                                                 <small style="display: none" id="giamgia_" class="form-text">Giảm giá không được để
                                                     trống</small>
                                             </div>
                                             <div class="form-group">
-                                                <!-- <label for="mota">Mô Tả</label> -->
+                                                 <label>Mô Tả</label>
                                                 <input type="text" class="form-control" placeholder="Mô Tả" name="motasanpham" id="mota"
                                                 th:value="${chitietsp.getMotasanpham()}">
-                                                <small style="display: none" id="mota_" class="form-text">Giảm giá không được để
+                                                <small style="display: none" id="mota_" class="form-text">Mô tả không được để
                                                     trống</small>
                                             </div>
                                             <div class="form-group">
-                                                <!-- <label for="soluong">Số Lượng</label> -->
+                                                 <label>Số Lượng</label>
                                                 <input type="text" class="form-control" placeholder="Số Lượng" name="soluong" id="soluong"
                                                 th:value="${#numbers.formatInteger(chitietsp.getSoluong(),1,'POINT')}">
-                                                <small style="display: none" id="soluong_" class="form-text">Giảm giá không được để
+                                                <small style="display: none" id="soluong_" class="form-text">Số lượng không được để
                                                     trống</small>
                                             </div>
 
